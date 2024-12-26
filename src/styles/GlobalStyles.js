@@ -25,25 +25,24 @@ const GlobalStyles = createGlobalStyle`
   /* Design System Variables */
   :root {
 
-    /* Color Palette */
-    --color-primary: #4caf50; /* Primary */
-    --color-primary-light: #81c784; /* Light Variant */
-    --color-primary-dark: #388e3c; /* Dark Variant */
+    --color-primary: #3D52A0; /* Primary */
+    --color-primary-light: #7091E6; /* Light Variant */
+    --color-primary-dark: #8697C4; /* Dark Variant */
 
-    --color-secondary: #ff5722; /* Secondary */
-    --color-secondary-light: #ff8a50; /* Light Variant */
-    --color-secondary-dark: #e64a19; /* Dark Variant */
+    --color-secondary: #ADBBDA; /* Secondary */
+    --color-secondary-light: #EDE8F5; /* Light Variant */
+    --color-secondary-dark: #8697C4; /* Dark Variant */
 
-    --color-accent: #ffc107; /* Accent */
+    --color-accent: #EDE8F5; /* Accent */
     --color-error: #f44336; /* Error */
-    --color-success: #4caf50; /* Success */
-    --color-warning: #ff9800; /* Warning */
+    --color-success: #4CAF50; /* Success */
+    --color-warning: #FF9800; /* Warning */
 
-    --color-bg: #f5f5f5; /* Background */
-    --color-surface: #ffffff; /* Surface */
-    --color-border: #e0e0e0; /* Border */
-    --color-text: #212121; /* Default Text */
-    --color-muted: #757575; /* Muted Text */
+    --color-bg: #EDE8F5; /* Background */
+    --color-surface: #FFFFFF; /* Surface */
+    --color-border: #ADBBDA; /* Border */
+    --color-text: #3D52A0; /* Default Text */
+    --color-muted: #8697C4; /* Muted Text */
 
     /* --color-primary: #333333; 
     --color-primary-light: #555555; 
