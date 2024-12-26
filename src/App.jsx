@@ -1,5 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainLayout from "./ui/MainLayout";
+import GlobalStyles from "./styles/GlobalStyles";
+
 function App() {
-  return <div>Home page for B2B by repaireze</div>;
+  return (
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
