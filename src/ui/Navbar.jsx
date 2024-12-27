@@ -57,11 +57,11 @@ const StyledNavbar = styled.nav`
   }
 
   .search-icon {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--color-text);
     cursor: pointer;
     border: 1px solid var(--color-primary);
-    padding: 0.5rem;
+    padding: 0.7rem;
     border-radius: 5px;
 
     &:hover {

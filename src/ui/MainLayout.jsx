@@ -3,6 +3,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -17,14 +18,6 @@ const MainBody = styled.main`
   overflow-y: auto;
 `;
 
-const Footer = styled.footer`
-  background-color: var(--color-secondary-dark);
-  color: var(--color-surface);
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-`;
-
 function MainLayout() {
   return (
     <LayoutWrapper>
@@ -32,7 +25,7 @@ function MainLayout() {
       <MainBody>
         <Outlet />
       </MainBody>
-      <Footer>&copy; 2024 MyWebsite. All Rights Reserved.</Footer>
+      <Footer />
     </LayoutWrapper>
   );
 }
