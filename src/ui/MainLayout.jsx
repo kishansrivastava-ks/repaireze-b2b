@@ -2,43 +2,12 @@
 // import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import Navbar from "./Navbar";
 
 const LayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-`;
-
-const Navbar = styled.nav`
-  background-color: var(--color-primary);
-  color: var(--color-surface);
-  padding: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 1rem;
-
-    a {
-      color: var(--color-surface);
-      text-decoration: none;
-      font-size: 1rem;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
 `;
 
 const MainBody = styled.main`
@@ -59,14 +28,7 @@ const Footer = styled.footer`
 function MainLayout() {
   return (
     <LayoutWrapper>
-      <Navbar>
-        <div className="logo">MyWebsite</div>
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </Navbar>
+      <Navbar />
       <MainBody>
         <Outlet />
       </MainBody>
