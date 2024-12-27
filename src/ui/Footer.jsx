@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 const StyledFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--color-border);
+  /* border-top: 1px solid var(--color-border); */
   height: max-content;
   padding: 2rem 10rem;
   background-color: var(--color-surface);
@@ -69,7 +69,7 @@ const StyledFooter = styled.div`
   }
 
   & > div:nth-child(2) {
-    flex-basis: 20%;
+    flex-basis: 18%;
     text-align: left;
 
     .title {
@@ -86,7 +86,8 @@ const StyledFooter = styled.div`
 
       a {
         font-size: 0.9rem;
-        color: var(--color-muted);
+        color: var(--color-secondary-dark);
+        /* color: var(color-primary-light); */
         text-decoration: none;
         transition: color 0.3s ease;
 
@@ -101,9 +102,84 @@ const StyledFooter = styled.div`
       }
     }
   }
+
   & > div:nth-child(3) {
-    flex-basis: 60%;
-    border: 2px solid red;
+    flex-basis: 62%;
+    /* border: 2px solid red; */
+    height: 100%;
+  }
+`;
+const GetInTouch = styled.div`
+  /* border: 2px solid var(--color-primary-light); */
+  min-height: max-content;
+  margin-bottom: 1rem;
+
+  .heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    .container {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      color: var(--color-secondary-dark);
+      transition: color 0.3s ease;
+
+      &:not(:last-child) {
+        border-right: 1px solid var(--color-border);
+      }
+      &:hover {
+        color: var(--color-primar);
+        cursor: pointer;
+      }
+    }
+  }
+`;
+const Services = styled.div`
+  /* border: 2px solid var(--color-secondary-light); */
+  min-height: max-content;
+
+  .heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    /* text-align: left; */
+  }
+
+  .services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    a {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      /* font-weight: bold; */
+      letter-spacing: 1px;
+      color: var(--color-text);
+      text-decoration: none;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background-color: var(--color-surface);
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: var(--color-primary);
+        color: var(--color-surface);
+      }
+
+      &.active {
+        background-color: var(--color-primary-dark);
+        color: var(--color-surface);
+      }
+    }
   }
 `;
 
@@ -180,7 +256,38 @@ function Footer() {
         </div>
 
         {/* Third Column (Placeholder for now) */}
-        <div>box 3</div>
+        <div>
+          <GetInTouch>
+            <div className="heading">Get in Touch</div>
+            <div className="content">
+              <div className="container">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Numquam, suscipit!
+              </div>
+              <div className="container">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis,
+                inventore!
+              </div>
+              <div className="container">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae,
+                corporis!
+              </div>
+            </div>
+          </GetInTouch>
+          <Services>
+            <div className="heading">Services</div>
+            <div className="services-list">
+              <NavLink to="/insurance">Insurance</NavLink>
+              <NavLink to="/games">Games</NavLink>
+              <NavLink to="/logicboard">Logicboard</NavLink>
+              <NavLink to="/data-recovery">Data Recovery</NavLink>
+              <NavLink to="/laptop">Laptop</NavLink>
+              <NavLink to="/macbook">Macbook</NavLink>
+              <NavLink to="/liquid-damage">Liquid Damage</NavLink>
+              <NavLink to="/unlocking">Unlocking</NavLink>
+            </div>
+          </Services>
+        </div>
       </StyledFooter>
       <Copyright>
         Copyright &copy; 2024 Repaireze for Business | All Rights Reserved
