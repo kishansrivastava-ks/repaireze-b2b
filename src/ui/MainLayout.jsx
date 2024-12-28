@@ -8,14 +8,18 @@ import Footer from "./Footer";
 const LayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
+  height: max-content;
+  /* border: 4px solid yellow; */
 `;
 
 const MainBody = styled.main`
   flex: 1;
   background-color: var(--color-bg);
-  padding: 2rem;
+  /* padding: 2rem; */
   overflow-y: auto;
+  min-height: max-content;
+  /* border: 4px solid green; */
 `;
 
 function MainLayout() {
