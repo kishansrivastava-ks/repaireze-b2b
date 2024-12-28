@@ -7,6 +7,8 @@ const Section = styled.section`
   /* border: 2px solid red; */
   background-color: var(--color-surface);
   background-color: #fff;
+  height: 88vh;
+  /* padding: 1.5rem 0; */
 `;
 
 const Container = styled.div`

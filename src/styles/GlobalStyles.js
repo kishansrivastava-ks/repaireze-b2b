@@ -172,6 +172,7 @@ const GlobalStyles = createGlobalStyle`
   /* Scrollbar Styling */
   ::-webkit-scrollbar {
     width: 6px;
+    display: none;
   }
 
   ::-webkit-scrollbar-track {

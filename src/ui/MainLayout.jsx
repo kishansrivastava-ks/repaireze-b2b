@@ -17,7 +17,7 @@ const MainBody = styled.main`
   flex: 1;
   background-color: var(--color-bg);
   /* padding: 2rem; */
-  overflow-y: auto;
+  /* overflow-y: auto; */
   min-height: max-content;
   /* border: 4px solid green; */
 `;

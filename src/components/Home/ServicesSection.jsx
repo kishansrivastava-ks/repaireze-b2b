@@ -58,7 +58,7 @@ const Container = styled.div`
 const CardContainer = styled.div`
   position: relative;
   width: 100%;
-  /* overflow: hidden; */
+  /* overflow-x: hidden; */
   /* border: 2px solid red; */
 `;
 
