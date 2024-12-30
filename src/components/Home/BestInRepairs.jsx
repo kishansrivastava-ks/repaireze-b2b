@@ -16,7 +16,7 @@ const products = [
 
 // Styled Components
 const Section = styled.section`
-  padding: 4rem 0;
+  /* padding: 4rem 0; */
   background: #ffffff;
   /* border: 0.5rem solid red; */
 `;
@@ -42,19 +42,20 @@ const Grid = styled.div`
   }
 
   gap: 1.5rem;
+  transform: scale(0.8);
 `;
 
 const ProductCardContainer = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 0.75rem;
-  aspect-ratio: 1;
+  /* aspect-ratio: 1; */
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transform: translateY(${(props) => (props.visible ? "0" : "20px")});
   transition: all 0.5s ease-out ${(props) => props.delay || "0ms"};
   /* border: 2px solid red; */
-  /* height: 15rem;
-  width: ; */
+  height: 90%;
+  width: 100%;
 `;
 
 const GradientBackground = styled.div`
@@ -119,29 +120,32 @@ const HighlightCard = styled.div`
   position: relative;
   border-radius: 0.75rem;
   padding: 2rem;
-  aspect-ratio: 1;
+  /* aspect-ratio: 1; */
+  height: 90%;
+  width: 100%;
   background: linear-gradient(
     to bottom right,
     rgba(0, 0, 255, 0.1),
     rgba(0, 0, 255, 0.05)
   );
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   opacity: ${(props) => (props.visible ? 1 : 0)};
-  transform: translateY(${(props) => (props.visible ? "0" : "20px")});
+  transform: translateX(${(props) => (props.visible ? "0" : "-40px")});
   transition: all 0.5s ease-out ${(props) => props.delay || "0ms"};
 
   h2 {
     font-size: 2rem;
     font-weight: 700;
-    color: #0000ff;
+    color: var(--color-primary);
     margin-bottom: 1rem;
   }
 
   p {
     font-size: 1.125rem;
-    color: #888888;
+    color: var(--color-primary);
     line-height: 1.75;
   }
 `;
@@ -194,6 +198,7 @@ const BestInRepairs = () => {
               </HighlightCard>
             ) : (
               <ProductCardContainer
+                className="flex-center"
                 key={index}
                 ref={(el) => (itemRefs.current[index] = el)}
                 visible={visibleItems.has(index)}
