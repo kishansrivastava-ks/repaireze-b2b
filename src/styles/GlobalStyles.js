@@ -169,6 +169,16 @@ const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 4px var(--color-primary);
   }
 
+  ::selection {
+  background-color: var(--color-primary); 
+  color: white; 
+  }
+
+  ::-moz-selection {
+  background-color: var(--color-primary);
+  color: white;
+  }
+
   /* Scrollbar Styling */
   ::-webkit-scrollbar {
     width: 6px;

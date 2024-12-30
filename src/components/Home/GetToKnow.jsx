@@ -47,6 +47,7 @@ const Content = styled.div`
   p {
     font-size: 1rem;
     color: var(--color-muted);
+    color: var(--color-primary);
     line-height: 1.75;
     margin-bottom: 1.5rem;
 
