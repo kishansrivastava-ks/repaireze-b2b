@@ -27,7 +27,8 @@ const allCards = [...serviceCards, ...serviceCards];
 
 const Section = styled.section`
   padding: 1rem 0;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
+  margin: 2rem 0;
   overflow: hidden;
   background-color: transparent;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
