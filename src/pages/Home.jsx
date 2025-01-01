@@ -3,6 +3,7 @@ import FAQ from "../components/Home/FAQ";
 import GetToKnow from "../components/Home/GetToKnow";
 import SearchServices from "../components/Home/SearchServices";
 import ServicesSection from "../components/Home/ServicesSection";
+import TestimonialsSection from "../components/Home/TestimonialsSection";
 import WhyRepaireze from "../components/Home/WhyRepaireze";
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
       <WhyRepaireze />
       <BestInRepairs />
       <FAQ />
+      <TestimonialsSection />
     </>
   );
 }
