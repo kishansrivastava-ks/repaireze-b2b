@@ -141,7 +141,8 @@ const NavButton = styled.button`
     transition: color 0.2s ease;
 
     &:hover {
-      color: var(--color-primary-dark);
+      /* color: var(--color-primary-dark); */
+      color: #fff;
     }
   }
 `;
