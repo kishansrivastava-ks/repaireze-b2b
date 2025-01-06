@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: var(--font-family-primary);
+    /* font-family: var(--font-family-playwrite); */
     line-height: 1.6;
     background-color: var(--color-bg);
     color: var(--color-text);
@@ -40,7 +41,7 @@ const GlobalStyles = createGlobalStyle`
 
     --color-bg: #EDE8F5; /* Background */
     --color-surface: #FFFFFF; /* Surface */
-    --color-border: #ADBBDA; /* Border */
+    --color-border: #ADBBDA; /* Border */ 
     --color-text: #3D52A0; /* Default Text */
     --color-muted: #8697C4; /* Muted Text */
 
@@ -66,6 +67,7 @@ const GlobalStyles = createGlobalStyle`
     /* Typography */
     --font-family-primary: 'Roboto', sans-serif;
     --font-family-secondary: 'Inter', sans-serif;
+    --font-family-playwrite: 'Playwrite AU SA', sans-serif;
 
     /* Spacing */
     --spacing-xs: 4px;

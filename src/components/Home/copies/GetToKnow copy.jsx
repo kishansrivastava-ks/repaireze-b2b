@@ -2,16 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
+  /* padding: 8rem 0; */
   overflow: hidden;
+  /* border: 2px solid red; */
   background-color: var(--color-surface);
   background-color: #fff;
   height: 88vh;
-
-  @media (max-width: 768px) {
-    height: auto;
-    min-height: 100vh;
-    padding: 3rem 0;
-  }
+  /* padding: 1.5rem 0; */
 `;
 
 const Container = styled.div`
@@ -23,17 +20,12 @@ const Container = styled.div`
   gap: 2rem;
   padding: 2rem 0;
 
-  @media (max-width: 768px) {
-    width: 92%;
-    padding: 0;
-    gap: 2.5rem;
-  }
-
   @media (min-width: 1024px) {
     grid-template-columns: 3fr 2fr;
     gap: 3rem;
     align-items: center;
   }
+  /* border: 2px solid red; */
 `;
 
 const Content = styled.div`
@@ -41,24 +33,13 @@ const Content = styled.div`
   transform: ${({ isVisible }) => `translateX(${isVisible ? "0" : "-50px"})`};
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 
-  @media (max-width: 768px) {
-    text-align: left;
-    transform: ${({ isVisible }) => `translateY(${isVisible ? "0" : "30px"})`};
-  }
-
   h2 {
     font-size: 2.5rem;
     font-weight: bold;
     color: var(--color-primary);
     margin-bottom: 2rem;
 
-    @media (max-width: 768px) {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       font-size: 3rem;
     }
   }
@@ -74,14 +55,7 @@ const Content = styled.div`
       margin-bottom: 0;
     }
 
-    @media (max-width: 768px) {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
-      opacity: 0.9;
-    }
-
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       font-size: 1.125rem;
     }
   }
@@ -91,13 +65,8 @@ const ImageWrapper = styled.div`
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transform: ${({ isVisible }) => `translateX(${isVisible ? "0" : "50px"})`};
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  /* border: 2px so lid green; */
   height: 80%;
-
-  @media (max-width: 768px) {
-    height: auto;
-    aspect-ratio: 4/3;
-    transform: ${({ isVisible }) => `translateY(${isVisible ? "0" : "30px"})`};
-  }
 
   img {
     width: 100%;
@@ -105,19 +74,9 @@ const ImageWrapper = styled.div`
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-out;
-    object-fit: cover;
-
-    @media (max-width: 768px) {
-      border-radius: 0.75rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
 
     &:hover {
       transform: scale(1.02);
-
-      @media (max-width: 768px) {
-        transform: scale(1.01); // Subtle scale on mobile
-      }
     }
   }
 `;

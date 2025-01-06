@@ -42,6 +42,7 @@ const features = [
 
 const Section = styled.section`
   padding: 6rem 0;
+  background-color: #fff;
 `;
 
 const Container = styled.div`
@@ -49,25 +50,27 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 
-  h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-size: 1.25rem;
-    color: var(--color-muted);
-  }
-
-  @media (min-width: 768px) {
-    h2 {
-      font-size: 3rem;
+  & > div {
+    & > h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--color-primary);
+      /* margin-bottom: -0.1rem; */
+    }
+    & > p {
+      font-size: 1.25rem;
+      color: var(--color-muted);
+      color: var(--color-primary);
     }
 
-    p {
-      font-size: 1.5rem;
+    @media (min-width: 768px) {
+      & > h2 {
+        font-size: 3rem;
+      }
+
+      & > p {
+        font-size: 1.5rem;
+      }
     }
   }
 `;
@@ -87,36 +90,82 @@ const Grid = styled.div`
 `;
 
 const Card = styled.div`
-  background: #fff;
-  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transform: ${({ isVisible }) =>
-    isVisible ? "translateY(0)" : "translateY(20px)"};
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-secondary-light),
+    var(--color-secondary)
+  );
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  transform: translateY(${({ isVisible }) => (isVisible ? "0" : "20px")});
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   transition-delay: ${({ delay }) => `${delay}ms`};
+  cursor: pointer;
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  &:hover .icon,
+  &:hover h3,
+  &:hover p {
+    color: #fff;
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom right,
+      var(--color-primary-light),
+      var(--color-primary)
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+`;
+
+const IconWrapper = styled.div`
+  color: var(--color-primary);
+  transition: color 0.5s ease-out;
 
   &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-0.5rem);
+    color: #fff;
   }
+`;
 
-  .icon {
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    transition: transform 0.3s ease-out;
+const Overlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-primary-light),
+    var(--color-primary)
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+`;
 
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
+const Content = styled.div`
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 
   h3 {
     font-size: 1.125rem;
     font-weight: bold;
     color: var(--color-primary);
+    transition: color 0.5s ease-out;
     margin-bottom: 0.5rem;
   }
 
@@ -124,13 +173,9 @@ const Card = styled.div`
     font-size: 0.875rem;
     color: var(--color-muted);
     line-height: 1.5;
+    transition: color 0.5s ease-out;
+    color: var(--color-primary);
   }
-`;
-
-const Flex = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
 `;
 
 const WhyRepaireze = () => {
@@ -174,13 +219,14 @@ const WhyRepaireze = () => {
               isVisible={visibleItems.has(index)}
               delay={index * 100}
             >
-              <Flex>
-                <div className="icon">{feature.icon}</div>
+              <Content>
+                <IconWrapper className="icon">{feature.icon}</IconWrapper>
                 <div>
                   <h3>{feature.title}</h3>
                   <p>{feature.description}</p>
                 </div>
-              </Flex>
+              </Content>
+              <Overlay className="overlay" />
             </Card>
           ))}
         </Grid>

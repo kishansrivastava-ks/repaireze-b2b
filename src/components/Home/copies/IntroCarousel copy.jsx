@@ -46,20 +46,12 @@ const Section = styled.section`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-
-  @media (max-width: 768px) {
-    padding: 1rem 0;
-  }
 `;
 
 const Container = styled.div`
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
-
-  @media (max-width: 768px) {
-    width: 95%;
-  }
 `;
 
 const CarouselContainer = styled.div`
@@ -69,14 +61,7 @@ const CarouselContainer = styled.div`
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-
-  @media (max-width: 768px) {
-    aspect-ratio: 16/9;
-    border-radius: 6px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
 `;
-
 const SlideContainer = styled.div`
   position: absolute;
   width: 100%;
@@ -97,21 +82,11 @@ const Controls = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-
-  @media (max-width: 768px) {
-    margin-top: 0.75rem;
-    flex-direction: column-reverse;
-    gap: 0.75rem;
-  }
 `;
 
 const DotsContainer = styled.div`
   display: flex;
   gap: 0.75rem;
-
-  @media (max-width: 768px) {
-    gap: 0.5rem;
-  }
 `;
 
 const Dot = styled.button`
@@ -124,11 +99,6 @@ const Dot = styled.button`
   cursor: pointer;
   padding: 0;
 
-  @media (max-width: 768px) {
-    width: 1.75rem;
-    height: 2px;
-  }
-
   &:hover {
     background-color: ${(props) =>
       props.active ? "var(--color-primary)" : "#94A3B8"};
@@ -138,10 +108,6 @@ const Dot = styled.button`
 const NavigationContainer = styled.div`
   display: flex;
   gap: 1.5rem;
-
-  @media (max-width: 768px) {
-    gap: 1rem;
-  }
 `;
 
 const NavButton = styled.button`
@@ -152,10 +118,6 @@ const NavButton = styled.button`
   transition: transform 0.2s ease;
   display: flex;
   align-items: center;
-
-  @media (max-width: 768px) {
-    padding: 0.35rem;
-  }
 
   &:hover {
     transform: scale(1.1);
@@ -170,11 +132,6 @@ const NavButton = styled.button`
     height: 1rem;
     color: var(--color-primary);
     transition: color 0.2s ease;
-
-    @media (max-width: 768px) {
-      width: 2rem;
-      height: 0.875rem;
-    }
 
     &:hover {
       color: var(--color-primary-dark);
@@ -193,10 +150,6 @@ const CaptionOverlay = styled.div`
   opacity: ${(props) => (props.active ? 1 : 0)};
   transform: translateY(${(props) => (props.active ? "0" : "20px")});
   transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-
-  @media (max-width: 768px) {
-    padding: 3rem 1.5rem 1.25rem;
-  }
 `;
 
 const Caption = styled.h2`
@@ -207,9 +160,7 @@ const Caption = styled.h2`
   color: var(--color-surface);
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
-    margin-bottom: 0.25rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1.8rem;
   }
 `;
 
@@ -220,9 +171,7 @@ const SubCaption = styled.p`
   color: var(--color-surface);
 
   @media (max-width: 768px) {
-    font-size: 0.875rem;
-    opacity: 0.95;
-    line-height: 1.4;
+    font-size: 1rem;
   }
 `;
 

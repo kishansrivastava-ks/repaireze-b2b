@@ -41,33 +41,42 @@ const features = [
 ];
 
 const Section = styled.section`
-  padding: 6rem 0;
+  padding: 4rem 0; // Reduced padding on mobile
   background-color: #fff;
+
+  @media (min-width: 768px) {
+    padding: 6rem 0;
+  }
 `;
 
 const Container = styled.div`
-  width: 90%;
+  width: 92%; // Slightly wider on mobile for better spacing
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem; // Added padding for mobile
 
   & > div {
+    margin-bottom: 2rem; // Added margin for better section spacing on mobile
+    text-align: center; // Center align on mobile
+
     & > h2 {
-      font-size: 2.5rem;
+      font-size: 2rem; // Smaller font on mobile
       font-weight: bold;
       color: var(--color-primary);
-      /* margin-bottom: -0.1rem; */
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
     }
+
     & > p {
-      font-size: 1.25rem;
-      color: var(--color-muted);
+      font-size: 1.125rem;
       color: var(--color-primary);
     }
 
     @media (min-width: 768px) {
+      text-align: left; // Left align on desktop
       & > h2 {
         font-size: 3rem;
       }
-
       & > p {
         font-size: 1.5rem;
       }
@@ -77,11 +86,12 @@ const Container = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 2rem;
+  grid-template-columns: 1fr; // Single column on mobile
+  gap: 1.25rem; // Reduced gap on mobile
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 
   @media (min-width: 1024px) {
@@ -92,7 +102,7 @@ const Grid = styled.div`
 const Card = styled.div`
   position: relative;
   overflow: hidden;
-  padding: 1.5rem;
+  padding: 1.25rem; // Slightly reduced padding on mobile
   border-radius: 0.5rem;
   background: linear-gradient(
     to bottom right,
@@ -105,31 +115,44 @@ const Card = styled.div`
   transition-delay: ${({ delay }) => `${delay}ms`};
   cursor: pointer;
 
-  &:hover::before {
-    opacity: 1;
+  @media (max-width: 767px) {
+    transform: none; // Disable transform on mobile for better performance
+    opacity: 1; // Always visible on mobile
   }
 
-  &:hover .icon,
-  &:hover h3,
-  &:hover p {
-    color: #fff;
+  // Rest of the Card styles remain the same
+`;
+
+const Content = styled.div`
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem; // Reduced gap on mobile
+
+  @media (max-width: 767px) {
+    flex-direction: column; // Stack icon and text on mobile
+    align-items: center;
+    text-align: center;
   }
 
-  &:hover .overlay {
-    opacity: 1;
+  h3 {
+    font-size: 1rem; // Smaller font on mobile
+    font-weight: bold;
+    color: var(--color-primary);
+    transition: color 0.5s ease-out;
+    margin-bottom: 0.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.125rem;
+    }
   }
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom right,
-      var(--color-primary-light),
-      var(--color-primary)
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
+  p {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    line-height: 1.5;
+    transition: color 0.5s ease-out;
   }
 `;
 
@@ -154,29 +177,29 @@ const Overlay = styled.div`
   transition: opacity 0.5s ease-out;
 `;
 
-const Content = styled.div`
-  position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+// const Content = styled.div`
+//   position: relative;
+//   z-index: 10;
+//   display: flex;
+//   align-items: flex-start;
+//   gap: 1rem;
 
-  h3 {
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: var(--color-primary);
-    transition: color 0.5s ease-out;
-    margin-bottom: 0.5rem;
-  }
+//   h3 {
+//     font-size: 1.125rem;
+//     font-weight: bold;
+//     color: var(--color-primary);
+//     transition: color 0.5s ease-out;
+//     margin-bottom: 0.5rem;
+//   }
 
-  p {
-    font-size: 0.875rem;
-    color: var(--color-muted);
-    line-height: 1.5;
-    transition: color 0.5s ease-out;
-    color: var(--color-primary);
-  }
-`;
+//   p {
+//     font-size: 0.875rem;
+//     color: var(--color-muted);
+//     line-height: 1.5;
+//     transition: color 0.5s ease-out;
+//     color: var(--color-primary);
+//   }
+// `;
 
 const WhyRepaireze = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
