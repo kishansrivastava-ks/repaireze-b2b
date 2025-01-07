@@ -11,16 +11,11 @@ import { NavLink } from "react-router-dom";
 const StyledFooter = styled.div`
   display: flex;
   justify-content: space-between;
+  /* border-top: 1px solid var(--color-border); */
   height: max-content;
   padding: 2rem 10rem;
   background-color: var(--color-surface);
   gap: 2rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 2rem 1.5rem;
-    gap: 3rem;
-  }
 
   & > div:first-child {
     flex-basis: 20%;
@@ -29,25 +24,18 @@ const StyledFooter = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    /* border: 2px solid red; */
     height: 100%;
-
-    @media (max-width: 768px) {
-      align-items: center;
-      text-align: center;
-    }
 
     & > img {
       height: 4rem;
       width: auto;
-
-      @media (max-width: 768px) {
-        height: 3.5rem;
-      }
     }
 
     .description {
       font-size: 0.9rem;
       color: var(--color-muted);
+      /* margin-bottom: 1rem; */
       text-align: center;
     }
 
@@ -58,19 +46,14 @@ const StyledFooter = styled.div`
       color: var(--color-text);
       justify-content: center;
       width: 100%;
-
       .icon {
         font-size: 1.2rem;
         color: var(--color-primary);
       }
-
-      @media (max-width: 768px) {
-        font-size: 0.9rem;
-      }
     }
 
     .social-icons {
-      gap: 1.5rem;
+      gap: 1rem;
       width: 100%;
 
       a {
@@ -89,10 +72,6 @@ const StyledFooter = styled.div`
     flex-basis: 18%;
     text-align: left;
 
-    @media (max-width: 768px) {
-      text-align: center;
-    }
-
     .title {
       font-size: 1.2rem;
       font-weight: bold;
@@ -103,18 +82,12 @@ const StyledFooter = styled.div`
     .quick-links {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
-
-      @media (max-width: 768px) {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem 1.5rem;
-      }
+      gap: 0.5rem;
 
       a {
         font-size: 0.9rem;
         color: var(--color-secondary-dark);
+        /* color: var(color-primary-light); */
         text-decoration: none;
         transition: color 0.3s ease;
 
@@ -132,15 +105,12 @@ const StyledFooter = styled.div`
 
   & > div:nth-child(3) {
     flex-basis: 62%;
+    /* border: 2px solid red; */
     height: 100%;
-
-    @media (max-width: 768px) {
-      flex-basis: 100%;
-    }
   }
 `;
-
 const GetInTouch = styled.div`
+  /* border: 2px solid var(--color-primary-light); */
   min-height: max-content;
   margin-bottom: 1rem;
 
@@ -148,21 +118,11 @@ const GetInTouch = styled.div`
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--color-primary);
-
-    @media (max-width: 768px) {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
   }
 
   .content {
     display: flex;
     justify-content: space-between;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
 
     .container {
       flex: 1;
@@ -173,22 +133,16 @@ const GetInTouch = styled.div`
 
       &:not(:last-child) {
         border-right: 1px solid var(--color-border);
-
-        @media (max-width: 768px) {
-          border-right: none;
-          border-bottom: 1px solid var(--color-border);
-        }
       }
-
       &:hover {
-        color: var(--color-primary);
+        color: var(--color-primar);
         cursor: pointer;
       }
     }
   }
 `;
-
 const Services = styled.div`
+  /* border: 2px solid var(--color-secondary-light); */
   min-height: max-content;
 
   .heading {
@@ -196,10 +150,7 @@ const Services = styled.div`
     font-weight: bold;
     color: var(--color-primary);
     margin-bottom: 1rem;
-
-    @media (max-width: 768px) {
-      text-align: center;
-    }
+    /* text-align: left; */
   }
 
   .services-list {
@@ -207,13 +158,10 @@ const Services = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
 
-    @media (max-width: 768px) {
-      justify-content: center;
-    }
-
     a {
       padding: 0.5rem 1rem;
       font-size: 0.9rem;
+      /* font-weight: bold; */
       letter-spacing: 1px;
       color: var(--color-text);
       text-decoration: none;
@@ -242,11 +190,6 @@ const Copyright = styled.footer`
   padding: 1rem;
   font-size: 1rem;
   letter-spacing: 1px;
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-    padding: 1rem 2rem;
-  }
 `;
 
 function Footer() {
