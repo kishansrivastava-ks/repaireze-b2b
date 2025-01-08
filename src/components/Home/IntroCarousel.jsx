@@ -5,10 +5,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const images = [
   {
     id: 1,
-    url: "/api/placeholder/intro1.jpg",
+    url: "/api/placeholder/intro1.png",
     alt: "Innovation at work",
-    caption: "Transforming Ideas into Digital Reality",
-    subCaption: "Innovative solutions for tomorrow's challenges",
+    caption:
+      "Get your ELECTRICAL APPLIENCES Installation, Repair & Service at your Door Step in 90 Minutes",
+    // subCaption: "Innovative solutions for tomorrow's challenges",
   },
   {
     id: 2,
@@ -19,24 +20,26 @@ const images = [
   },
   {
     id: 3,
-    url: "/api/placeholder/intro3.jpg",
+    url: "/api/placeholder/intro3.png",
     alt: "Creative workspace",
-    caption: "Expertise That Drives Excellence",
-    subCaption: "Delivering quality through innovation and dedication",
+    caption:
+      "Let us go Green to get our planet clean \n With REPAIREZE Deep Cleaning Services ",
+    // subCaption: "Delivering quality through innovation and dedication",
   },
   {
     id: 4,
-    url: "/api/placeholder/intro1.jpg",
+    url: "/api/placeholder/intro4.png",
     alt: "Technology focus",
-    caption: "Empowering Digital Success",
-    subCaption: "Strategic solutions for sustainable growth",
+    caption: "Got a leak? We'll take a peek! With REPAIREZE Plumber Service",
+    // subCaption: "Strategic solutions for sustainable growth",
   },
   {
     id: 5,
-    url: "/api/placeholder/intro2.jpg",
+    url: "/api/placeholder/intro5.png",
     alt: "Future forward",
-    caption: "Leading the Digital Evolution",
-    subCaption: "Pioneering the future of technology and innovation",
+    caption:
+      "Precision Carpentry, Impeccable Results With REPAIREZE Carpenter service",
+    // subCaption: "Pioneering the future of technology and innovation",
   },
 ];
 

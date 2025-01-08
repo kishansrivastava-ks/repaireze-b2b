@@ -186,15 +186,13 @@ const SearchServices = () => {
   }, []);
 
   const brands = [
-    "Select Your Brand",
-    "Apple",
-    "Samsung",
-    "Google",
-    "OnePlus",
-    "Sony",
-    "LG",
-    "Huawei",
-    "Xiaomi",
+    "Select Your Service",
+    "Electrical Appliances (service, repairing, Installation)",
+    "Deep Cleaning Service",
+    "Pest Control Service",
+    "Plumbing Works",
+    "Carpentry Works",
+    "Electrical Works",
   ];
 
   const categories = [

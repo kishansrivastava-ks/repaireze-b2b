@@ -67,7 +67,7 @@ const Content = styled.div`
     font-size: 1rem;
     color: var(--color-muted);
     color: var(--color-primary);
-    line-height: 1.75;
+    line-height: 1.5;
     margin-bottom: 1.5rem;
 
     &:last-child {
@@ -160,21 +160,33 @@ const GetToKnow = () => {
     <Section>
       <Container>
         <Content ref={contentRef} isVisible={isContentVisible}>
-          <h2>Get to know us</h2>
+          <h2>About the company</h2>
           <p>
-            We are a forward-thinking company dedicated to delivering
-            exceptional solutions that transform businesses. With years of
-            expertise and a passion for innovation, our team works tirelessly to
-            create meaningful impact for our clients.
+            REPAIREZE started its journey in 2021 in Electrical Appliances
+            (service, repairing, Installation), Deep Cleaning Service, Pest
+            Control Service, Plumbing Works, Carpentry Works, Electrical Works
+            with affordable price and superior quality.
           </p>
           <p>
-            Our commitment to excellence and customer satisfaction drives
-            everything we do. We believe in building lasting relationships and
-            delivering value that extends beyond the immediate project scope.
+            Having proper service facility compendious marketing enabled us at
+            REPAIREZE to deliver a proper, easy and optimum solution to our
+            customers.
+          </p>
+          <p>
+            Transparency, Quality and Customer Service is our main objective and
+            motto.
+          </p>
+          <p>
+            REPAIREZE stands strong with Expert, Talented and Experienced
+            Technicians.
+          </p>
+          <p>
+            We have proved that our prime focus is excellent quality and
+            dedicated customer service.{" "}
           </p>
         </Content>
         <ImageWrapper ref={imageRef} isVisible={isImageVisible}>
-          <img src="/gtn-img.jpg" alt="Our team at work" />
+          <img src="/about.png" alt="Our team at work" />
         </ImageWrapper>
       </Container>
     </Section>
