@@ -160,7 +160,7 @@ const GetToKnow = () => {
     <Section>
       <Container>
         <Content ref={contentRef} isVisible={isContentVisible}>
-          <h2>About the company</h2>
+          <h2>Kishansrivastava</h2>
           <p>
             REPAIREZE started its journey in 2021 in Electrical Appliances
             (service, repairing, Installation), Deep Cleaning Service, Pest

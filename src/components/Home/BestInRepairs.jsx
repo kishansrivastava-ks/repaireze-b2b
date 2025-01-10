@@ -3,15 +3,15 @@ import styled from "styled-components";
 
 // Product data
 const products = [
-  { name: "Smartphones", image: "/api/placeholder/smartphone.avif" },
-  { name: "Tablets", image: "/api/placeholder/tablet.jpg" },
-  { name: "Laptops", image: "/api/placeholder/laptop.avif" },
+  { name: "Home Appliances", image: "/api/placeholder/appliances.png" },
+  { name: "Pest Control ", image: "/api/placeholder/pestcontrol.png" },
+  { name: "Cleaning", image: "/api/placeholder/clean.png" },
   { name: "Gaming Consoles", image: "/api/placeholder/console.jpg" },
   { name: "Smart Watches", image: "/api/placeholder/smartwatch.avif" },
   { name: "Desktop PCs", image: "/api/placeholder/desktop.jpg" },
-  { name: "Audio Devices", image: "/api/placeholder/audio.jpg" },
-  { name: "Cameras", image: "/api/placeholder/camera.avif" },
-  { name: "Washing Machine", image: "/api/placeholder/wm.jpg" },
+  { name: "Audio Devices", image: "/api/placeholder/tools.png" },
+  { name: "Cameras", image: "/api/placeholder/tools2.png" },
+  { name: "Washing Machine", image: "/api/placeholder/tools3.png" },
 ];
 
 // Styled Components

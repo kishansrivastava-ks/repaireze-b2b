@@ -107,34 +107,24 @@ const FAQ = () => {
 
   const faqData = [
     {
-      question: "What types of devices do you repair?",
+      question: "Do you offer any discounts or promotions on Services?",
       answer:
-        "We repair a wide range of devices including smartphones, tablets, laptops, gaming consoles, smartwatches, and other electronic devices. Our expert technicians are trained to handle various brands and models with precision and care.",
+        "We don't offer discount or promotions. However, we can help you find discounts or promotions for specific service if you provide more details. Let us know what you're looking for, and we will assist you in finding the best deals on services!",
     },
     {
-      question: "How long does a typical repair take?",
+      question: "What types of services do you deliver?",
       answer:
-        "Most repairs are completed within 24-48 hours, depending on the type of repair and parts availability. Simple repairs like screen replacements can often be done the same day. We'll provide you with a specific timeframe when you bring in your device.",
+        "We deliver wide range of services incliuding Electrical Appliences( Installation, Service & Repair), Pest Control Services, Deep Cleaning Services, Carpentery Services, Plumber Services, Electrical Works.",
     },
     {
-      question: "Do you offer warranty on repairs?",
+      question: "Do you offer post service coverage?",
       answer:
-        "Yes, we provide a comprehensive warranty on all our repairs. Parts are covered for 90 days, and our labor comes with a 30-day warranty. If you experience any issues related to our repair work, we'll fix it at no additional cost.",
+        "Yes, we provide a comprehensive post service coverage on all our services. Spare Parts are covered for 45 days, and our labor work comes with a 15-days post service coverage. If you experience any issues related to our service, we'll fix it at no additional cost.",
     },
     {
       question: "What are your payment options?",
       answer:
-        "We accept all major credit cards, debit cards, cash, and mobile payment solutions. For business clients, we also offer invoicing options. Payment is only required once the repair is successfully completed.",
-    },
-    {
-      question: "Do you offer on-site repairs?",
-      answer:
-        "Yes, we provide on-site repair services for business clients and special cases. Additional charges may apply based on location and urgency. Please contact us for more information about our on-site repair services.",
-    },
-    {
-      question: "What happens if my device can't be repaired?",
-      answer:
-        "If we determine that your device cannot be repaired, we'll explain the reason why and discuss alternative options with you. You won't be charged for our diagnostic service in such cases, and we can provide recommendations for replacement options.",
+        "We accept all major credit cards, debit cards, cash, and UPI’s. For business clients, we also offer directly Bank Transfer options. Payment is only required once the service is successfully done.",
     },
   ];
 
