@@ -86,6 +86,7 @@ const Caption = styled.h2`
   font-weight: bold;
   margin: 0;
   line-height: 1.2;
+  letter-spacing: 2px;
 
   @media (min-width: 768px) {
     font-size: 2.5rem;
