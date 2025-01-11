@@ -8,7 +8,7 @@ const images = [
     url: "/api/placeholder/intro1.png",
     alt: "Innovation at work",
     caption:
-      "Get your ELECTRICAL APPLIENCES Installation, Repair & Service at your Door Step in 90 Minutes",
+      "Manage your Repairing needs with our comprehensive B2B Maintenance solutions",
     // subCaption: "Innovative solutions for tomorrow's challenges",
   },
   {
@@ -16,7 +16,7 @@ const images = [
     url: "/api/placeholder/intro2.jpg",
     alt: "Modern solutions",
     caption: "Building Tomorrow's Technology Today",
-    subCaption: "Advanced solutions powering digital transformation",
+    // subCaption: "Advanced solutions powering digital transformation",
   },
   {
     id: 3,
@@ -26,13 +26,13 @@ const images = [
       "Let us go Green to get our planet clean \n With REPAIREZE Deep Cleaning Services ",
     // subCaption: "Delivering quality through innovation and dedication",
   },
-  {
-    id: 4,
-    url: "/api/placeholder/intro4.png",
-    alt: "Technology focus",
-    caption: "Got a leak? We'll take a peek! With REPAIREZE Plumber Service",
-    // subCaption: "Strategic solutions for sustainable growth",
-  },
+  // {
+  //   id: 4,
+  //   url: "/api/placeholder/intro4.png",
+  //   alt: "Technology focus",
+  //   caption: "Got a leak? We'll take a peek! With REPAIREZE Plumber Service",
+  //   // subCaption: "Strategic solutions for sustainable growth",
+  // },
   {
     id: 5,
     url: "/api/placeholder/intro5.png",
