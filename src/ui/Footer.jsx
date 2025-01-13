@@ -334,14 +334,14 @@ function Footer() {
           <Services>
             <div className="heading">Services</div>
             <div className="services-list">
-              <NavLink to="/insurance">Insurance</NavLink>
-              <NavLink to="/games">Games</NavLink>
-              <NavLink to="/logicboard">Logicboard</NavLink>
-              <NavLink to="/data-recovery">Data Recovery</NavLink>
-              <NavLink to="/laptop">Laptop</NavLink>
-              <NavLink to="/macbook">Macbook</NavLink>
-              <NavLink to="/liquid-damage">Liquid Damage</NavLink>
-              <NavLink to="/unlocking">Unlocking</NavLink>
+              <NavLink to="/services/electrical-appliances">
+                Electrical Appliances
+              </NavLink>
+              <NavLink to="/services/deep-cleaning">Deep Cleaning</NavLink>
+              <NavLink to="/services/pest-control">Pest Control</NavLink>
+              <NavLink to="/services/plumbing">Plumbing</NavLink>
+              <NavLink to="/services/carpentry">Carpentry</NavLink>
+              <NavLink to="/services/electrical">Electrical</NavLink>
             </div>
           </Services>
         </div>

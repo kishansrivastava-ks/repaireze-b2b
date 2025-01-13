@@ -1,25 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import {
-  Briefcase,
-  Code,
-  Database,
-  Globe,
-  Layout,
-  Shield,
-  Smartphone,
-  Users,
-} from "lucide-react";
+import { Zap, Brush, Bug, Wrench, Hammer, Power } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const serviceCards = [
-  { icon: <Layout size={40} />, title: "Web Design" },
-  { icon: <Code size={40} />, title: "Development" },
-  { icon: <Smartphone size={40} />, title: "Mobile Apps" },
-  { icon: <Database size={40} />, title: "Cloud Solutions" },
-  { icon: <Shield size={40} />, title: "Cybersecurity" },
-  { icon: <Users size={40} />, title: "IT Consulting" },
-  { icon: <Globe size={40} />, title: "Digital Marketing" },
-  { icon: <Briefcase size={40} />, title: "Business Analysis" },
+  {
+    icon: <Power size={40} />,
+    title: "Electrical Appliances",
+    path: "/services/electrical-appliances",
+  },
+  {
+    icon: <Brush size={40} />,
+    title: "Deep Cleaning",
+    path: "/services/deep-cleaning",
+  },
+  {
+    icon: <Bug size={40} />,
+    title: "Pest Control",
+    path: "/services/pest-control",
+  },
+  { icon: <Wrench size={40} />, title: "Plumbing", path: "/services/plumbing" },
+  {
+    icon: <Hammer size={40} />,
+    title: "Carpentry",
+    path: "/services/carpentry",
+  },
+  {
+    icon: <Zap size={40} />,
+    title: "Electrical",
+    path: "/services/electrical",
+  },
 ];
 
 const allCards = [...serviceCards, ...serviceCards];
@@ -141,10 +151,10 @@ const CardList = styled.div`
   }
 `;
 
-const Card = styled.div`
+const Card = styled(NavLink)`
   flex: none;
   width: 280px; // Fixed width for consistency
-  aspect-ratio: 3/4;
+  aspect-ratio: 3/3;
   background-color: #fff;
   border-radius: 0.75rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -248,7 +258,12 @@ const ServicesSection = () => {
       <CardContainer>
         <CardList>
           {allCards.map((service, index) => (
-            <Card key={index} isVisible={isVisible} delay={index * 100}>
+            <Card
+              key={index}
+              isVisible={isVisible}
+              delay={index * 100}
+              to={service.path}
+            >
               <div className="icon">{service.icon}</div>
               <h3>{service.title}</h3>
               <p>Innovative solutions tailored to your needs</p>
