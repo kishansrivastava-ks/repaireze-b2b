@@ -321,7 +321,7 @@ function Navbar() {
               ))}
             </ServicesDropDown>
           </OurServices>
-          <NavLink to="/services">Get Free Quota</NavLink>
+          <NavLink to="/brands">Choose Brands</NavLink>
           <NavLink to="/contact">Blogs</NavLink>
           <NavLink to="/contact">FAQs</NavLink>
           <NavLink to="/contact">About Us</NavLink>

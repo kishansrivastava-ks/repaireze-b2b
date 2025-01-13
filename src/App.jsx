@@ -8,6 +8,7 @@ import PestControl from "./pages/Services/PestControl";
 import Plumbing from "./pages/Services/Plumbing";
 import Carpentry from "./pages/Services/Carpentry";
 import Electrical from "./pages/Services/Electrical";
+import Brands from "./pages/Brands";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Route path="services/plumbing" element={<Plumbing />} />
             <Route path="services/carpentry" element={<Carpentry />} />
             <Route path="services/electrical" element={<Electrical />} />
+
+            <Route path="/brands" element={<Brands />} />
           </Route>
         </Routes>
       </BrowserRouter>
