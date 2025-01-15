@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ChevronDown, Search } from "lucide-react";
@@ -23,27 +24,28 @@ const Section = styled.section`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background-image: url("/api/placeholder/search-service-bg.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(8px);
     z-index: 0;
   }
+
+  @media (max-width: 768px) {
+    height: 80vh;
+    background: white;
+    /* border: 2px solid red; */
+
+    &::before {
+      display: none;
+    }
+
+    background-image: none;
+  }
 `;
 
 const Overlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -166,6 +168,9 @@ const Button = styled.button`
 const SearchServices = () => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef(null);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const containerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -224,7 +229,7 @@ const SearchServices = () => {
           </IconWrapper>
         </SelectWrapper>
 
-        <SelectWrapper>
+        {/* <SelectWrapper>
           <Select defaultValue={categories[0]}>
             {categories.map((category, index) => (
               <option key={index} value={category} disabled={index === 0}>
@@ -235,7 +240,7 @@ const SearchServices = () => {
           <IconWrapper>
             <ChevronDown size={20} />
           </IconWrapper>
-        </SelectWrapper>
+        </SelectWrapper> */}
 
         <Button>
           <Search size={20} />

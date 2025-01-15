@@ -198,7 +198,9 @@ const CaptionOverlay = styled.div`
   transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
 
   @media (max-width: 768px) {
-    padding: 3rem 1.5rem 1.25rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+
+    padding: 2rem 1.5rem 0;
   }
 `;
 
@@ -210,8 +212,9 @@ const Caption = styled.h2`
   color: var(--color-surface);
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
+    /* margin-bottom: 0.25rem; */
+    font-weight: 500;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 `;
