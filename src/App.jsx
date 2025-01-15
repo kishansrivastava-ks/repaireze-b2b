@@ -9,6 +9,7 @@ import Plumbing from "./pages/Services/Plumbing";
 import Carpentry from "./pages/Services/Carpentry";
 import Electrical from "./pages/Services/Electrical";
 import Brands from "./pages/Brands";
+import FAQs from "./pages/FAQs";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="services/electrical" element={<Electrical />} />
 
             <Route path="/brands" element={<Brands />} />
+            <Route path="/faq" element={<FAQs />} />
           </Route>
         </Routes>
       </BrowserRouter>
