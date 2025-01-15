@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ChevronDown, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
   position: relative;
@@ -167,7 +168,6 @@ const Button = styled.button`
 
 const SearchServices = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef(null);
   const [selectedBrand, setSelectedBrand] = useState("");
   const containerRef = useRef(null);
   const navigate = useNavigate();
@@ -191,24 +191,29 @@ const SearchServices = () => {
   }, []);
 
   const brands = [
-    "Select Your Service",
-    "Electrical Appliances (service, repairing, Installation)",
-    "Deep Cleaning Service",
-    "Pest Control Service",
-    "Plumbing Works",
-    "Carpentry Works",
-    "Electrical Works",
+    { name: "Select Your Service", link: "" },
+    {
+      name: "Electrical Appliances",
+      link: "/services/electrical-appliances",
+    },
+    { name: "Deep Cleaning Service", link: "/services/deep-cleaning" },
+    { name: "Pest Control Service", link: "/services/pest-control" },
+    { name: "Plumbing Works", link: "/services/plumbing" },
+    { name: "Carpentry Works", link: "/services/carpentry" },
+    { name: "Electrical Works", link: "/services/electrical-works" },
   ];
 
-  const categories = [
-    "Select Your Category",
-    "Smartphones",
-    "Tablets",
-    "Laptops",
-    "Smart Watches",
-    "Gaming Consoles",
-    "Accessories",
-  ];
+  const handleSearch = () => {
+    const brandLink = brands.find(
+      (brand) => brand.name === selectedBrand
+    )?.link;
+
+    if (brandLink) {
+      navigate(brandLink);
+    } else {
+      alert("Please select a valid service to search.");
+    }
+  };
 
   return (
     <Section>
@@ -217,10 +222,14 @@ const SearchServices = () => {
         <Title>Search Services</Title>
 
         <SelectWrapper>
-          <Select defaultValue={brands[0]}>
+          <Select
+            defaultValue={brands[0].name}
+            value={selectedBrand}
+            onChange={(e) => setSelectedBrand(e.target.value)}
+          >
             {brands.map((brand, index) => (
-              <option key={index} value={brand} disabled={index === 0}>
-                {brand}
+              <option key={index} value={brand.name} disabled={index === 0}>
+                {brand.name}
               </option>
             ))}
           </Select>
@@ -229,20 +238,7 @@ const SearchServices = () => {
           </IconWrapper>
         </SelectWrapper>
 
-        {/* <SelectWrapper>
-          <Select defaultValue={categories[0]}>
-            {categories.map((category, index) => (
-              <option key={index} value={category} disabled={index === 0}>
-                {category}
-              </option>
-            ))}
-          </Select>
-          <IconWrapper>
-            <ChevronDown size={20} />
-          </IconWrapper>
-        </SelectWrapper> */}
-
-        <Button>
+        <Button onClick={handleSearch}>
           <Search size={20} />
           Search Services
         </Button>
