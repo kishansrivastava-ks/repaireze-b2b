@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const StyledNavbar = styled.nav`
   display: flex;
@@ -220,26 +220,9 @@ const ServiceLink = styled(NavLink)`
   gap: 0.75rem;
 
   &:hover {
-    /* background-color: var(--color-primary); */
     color: #fff;
     transform: translateX(4px);
   }
-
-  /* Icon container */
-
-  /* &:hover::before {
-    background-color: white;
-  } */
-
-  /* Active state */
-  /* &.active {
-    background-color: var(--color-primary);
-    color: white;
-
-    &::before {
-      background-color: white;
-    }
-  } */
 `;
 const OurServices = styled(NavLink)`
   font-size: 1rem;
@@ -276,8 +259,55 @@ const OurServices = styled(NavLink)`
   }
 `;
 
+const OurServicesMobile = styled(NavLink)`
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+`;
+const DropdownMobile = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform-origin: top;
+  transform: scaleY(${(props) => (props.$isDropdownMobileOpen ? "1" : "0")});
+  opacity: ${(props) => (props.$isDropdownMobileOpen ? "1" : "0")};
+  max-height: ${(props) => (props.$isDropdownMobileOpen ? "max-content" : "0")};
+  transition: all 0.3s ease;
+`;
+const StyledChevron = styled(ChevronDown)`
+  transform: rotate(
+    ${(props) => (props.$isDropdownMobileOpen ? "180deg" : "0deg")}
+  );
+  transition: transform 0.3s ease;
+`;
+const NavList = styled.nav`
+  display: flex;
+  flex-direction: column;
+`;
+const StyledNavLink = styled(NavLink)`
+  padding: 0.75rem 1rem;
+  color: #1f2937;
+  text-decoration: none;
+  /* border-bottom: 1px solid #e5e7eb; */
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownMobileOpen, setIsDropdownMobileOpen] = useState(false);
 
   const services = [
     { name: "Electrical Appliances", path: "/services/electrical-appliances" },
@@ -364,11 +394,57 @@ function Navbar() {
           <NavLink to="/" exact onClick={() => setIsOpen(false)}>
             Home
           </NavLink>
-          <NavLink to="/about" onClick={() => setIsOpen(false)}>
-            Our Services
-          </NavLink>
-          <NavLink to="/services" onClick={() => setIsOpen(false)}>
-            Get Free Quota
+          <OurServicesMobile
+            onClick={() => setIsDropdownMobileOpen(!isDropdownMobileOpen)}
+          >
+            <span>Our Services</span>{" "}
+            <StyledChevron
+              size={20}
+              $isDropdownMobileOpen={isDropdownMobileOpen}
+            />
+            <DropdownMobile $isDropdownMobileOpen={isDropdownMobileOpen}>
+              <NavList>
+                <StyledNavLink
+                  to="/services/electrical-appliances"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Electrical Appliances
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/deep-cleaning"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Deep Cleaning
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/pest-control"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Pest Control
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/plumbing"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Plumbing
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/carpentry"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Carpentry
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/electrical"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Electrical
+                </StyledNavLink>
+              </NavList>
+            </DropdownMobile>
+          </OurServicesMobile>
+          <NavLink to="/brands" onClick={() => setIsOpen(false)}>
+            Choose brands
           </NavLink>
           <NavLink to="/contact" onClick={() => setIsOpen(false)}>
             Blogs
