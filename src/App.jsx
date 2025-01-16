@@ -10,6 +10,7 @@ import Carpentry from "./pages/Services/Carpentry";
 import Electrical from "./pages/Services/Electrical";
 import Brands from "./pages/Brands";
 import FAQs from "./pages/FAQs";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
 
             <Route path="/brands" element={<Brands />} />
             <Route path="/faq" element={<FAQs />} />
+            <Route path="/about" element={<AboutUs />} />
           </Route>
         </Routes>
       </BrowserRouter>

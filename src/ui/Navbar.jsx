@@ -354,7 +354,7 @@ function Navbar() {
           <NavLink to="/brands">Choose Brands</NavLink>
           <NavLink to="/contact">Blogs</NavLink>
           <NavLink to="/faq">FAQs</NavLink>
-          <NavLink to="/contact">About Us</NavLink>
+          <NavLink to="/about">About Us</NavLink>
           <NavLink to="/contact">Contact Us</NavLink>
         </div>
 
@@ -452,7 +452,7 @@ function Navbar() {
           <NavLink to="/faq" onClick={() => setIsOpen(false)}>
             FAQs
           </NavLink>
-          <NavLink to="/contact" onClick={() => setIsOpen(false)}>
+          <NavLink to="/about" onClick={() => setIsOpen(false)}>
             About Us
           </NavLink>
           <NavLink to="/contact" onClick={() => setIsOpen(false)}>
