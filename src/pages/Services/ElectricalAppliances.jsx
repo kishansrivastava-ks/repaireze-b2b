@@ -26,8 +26,8 @@ function ElectricalAppliances() {
   return (
     <>
       <InfoImageContainer
-        imageSrc="/api/placeholder/intro2.jpg"
-        caption="Delivering expert appliance repair solutions, one home at a time."
+        imageSrc="/api/placeholder/elec-app.png"
+        caption="Buy the love your electrical appliances need, in the form of AMC+"
       />
       <Intro />
       <ServicesCovered />

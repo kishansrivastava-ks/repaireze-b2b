@@ -11,6 +11,7 @@ import Electrical from "./pages/Services/Electrical";
 import Brands from "./pages/Brands";
 import FAQs from "./pages/FAQs";
 import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/brands" element={<Brands />} />
             <Route path="/faq" element={<FAQs />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
           </Route>
         </Routes>
       </BrowserRouter>

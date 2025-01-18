@@ -7,6 +7,7 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { MapPin, Phone } from "lucide-react";
 
 const StyledFooter = styled.div`
   display: flex;
@@ -166,7 +167,7 @@ const GetInTouch = styled.div`
 
     .container {
       flex: 1;
-      text-align: center;
+      text-align: left;
       padding: 1rem;
       color: var(--color-secondary-dark);
       transition: color 0.3s ease;
@@ -183,6 +184,16 @@ const GetInTouch = styled.div`
       &:hover {
         color: var(--color-primary);
         cursor: pointer;
+      }
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      /* border: 1px solid red; */
+      & > div {
+        display: flex;
+        align-items: flex-start;
+        justify-content: start;
+        gap: 0.5rem;
       }
     }
   }
@@ -304,7 +315,7 @@ function Footer() {
             </NavLink>
             <NavLink to="/repair">Repair</NavLink>
             <NavLink to="/blogs">Blogs</NavLink>
-            <NavLink to="/faqs">FAQs</NavLink>
+            <NavLink to="/faq">FAQs</NavLink>
             <NavLink to="/about">About Us</NavLink>
             <NavLink to="/contact">Contact Us</NavLink>
             <NavLink to="/terms">Terms and Conditions</NavLink>
@@ -318,17 +329,38 @@ function Footer() {
             <div className="heading">Get in Touch</div>
             <div className="content">
               <div className="container">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Numquam, suscipit!
+                <div>
+                  <span>
+                    <MapPin />
+                  </span>
+                  New Delhi Plot No. 320-A, Block P, Uttam Nagar East Delhi –
+                  110059
+                </div>
+                <div>
+                  <span>
+                    <Phone />
+                  </span>
+                  9821212667
+                </div>
               </div>
               <div className="container">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis,
-                inventore!
+                <div>
+                  <span>
+                    <MapPin />
+                  </span>
+                  Varanasi 667 Dandupur Chandmari Shivpur Varanasi - 221003
+                </div>
+                <div>
+                  <span>
+                    <Phone />
+                  </span>
+                  8860887541
+                </div>
               </div>
-              <div className="container">
+              {/* <div className="container">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae,
                 corporis!
-              </div>
+              </div> */}
             </div>
           </GetInTouch>
           <Services>

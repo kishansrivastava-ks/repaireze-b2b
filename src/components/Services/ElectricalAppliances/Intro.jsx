@@ -70,13 +70,15 @@ const Intro = () => {
     <Section>
       <Container>
         <IntroHeader isVisible>
-          <h2>Got a broken appliance? Repaireze is here to help!</h2>
+          <h2>
+            Repaireze covers your electrical& electronics repair and service in
+            an integrated way!
+          </h2>
           <p>
-            Repaireze specializes in repairing a wide range of home appliances.
-            With our experienced team, we quickly diagnose and fix issues to get
-            your appliances back in working order in no time. We provide repair
-            services for all major appliances, including refrigerators, washing
-            machines, ovens, dishwashers, and more.
+            With B2B Repairing Suites, we ensure your electrical appliances
+            operate uninterrupted with minimal or zero downtime. Explore a new
+            way of taking care of your business premises through our
+            comprehensive plan for electrical and electronic appliances.
           </p>
         </IntroHeader>
       </Container>
