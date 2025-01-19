@@ -109,28 +109,6 @@ const StepsWrapper = styled.div`
   }
 `;
 
-// const ProgressLine = styled.div`
-//   position: absolute;
-//   top: 3rem;
-//   left: 2rem;
-//   right: 2rem;
-//   height: 3px;
-//   background: linear-gradient(
-//     90deg,
-//     #4f46e5 0%,
-//     #4f46e5 ${(props) => (props.activeStep + 1) * 20}%,
-//     #e2e8f0 ${(props) => (props.activeStep + 1) * 20}%,
-//     #e2e8f0 100%
-//   );
-//   border-radius: 4px;
-//   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-//   z-index: 1;
-
-//   @media (max-width: 768px) {
-//     display: none;
-//   }
-// `;
-
 const ProgressSegment = styled.div`
   position: absolute;
   top: 50%;
@@ -220,34 +198,6 @@ const StepDescription = styled.p`
   line-height: 1.6;
   margin-bottom: 1rem;
 `;
-
-// const DetailsContainer = styled.div`
-//   padding-top: 1rem;
-//   border-top: 1px solid #e2e8f0;
-//   animation: ${slideUp} 0.3s ease-out forwards;
-// `;
-
-// const DetailsList = styled.ul`
-//   margin-top: 0.5rem;
-// `;
-
-// const DetailItem = styled.li`
-//   display: flex;
-//   align-items: center;
-//   font-size: 0.875rem;
-//   color: #64748b;
-//   margin-bottom: 0.5rem;
-
-//   &::before {
-//     content: "";
-//     width: 4px;
-//     height: 4px;
-//     border-radius: 50%;
-//     background: #4f46e5;
-//     margin-right: 0.5rem;
-//     flex-shrink: 0;
-//   }
-// `;
 
 const WorkProcess = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
