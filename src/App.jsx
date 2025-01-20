@@ -12,6 +12,7 @@ import Brands from "./pages/Brands";
 import FAQs from "./pages/FAQs";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
+import Blogs from "./pages/Blogs";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/faq" element={<FAQs />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/blogs" element={<Blogs />} />
           </Route>
         </Routes>
       </BrowserRouter>

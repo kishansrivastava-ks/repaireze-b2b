@@ -352,7 +352,7 @@ function Navbar() {
             </ServicesDropDown>
           </OurServices>
           <NavLink to="/brands">Choose Brands</NavLink>
-          <NavLink to="/contact">Blogs</NavLink>
+          <NavLink to="/blogs">Blogs</NavLink>
           <NavLink to="/faq">FAQs</NavLink>
           <NavLink to="/about">About Us</NavLink>
           <NavLink to="/contact">Contact Us</NavLink>
@@ -446,7 +446,7 @@ function Navbar() {
           <NavLink to="/brands" onClick={() => setIsOpen(false)}>
             Choose brands
           </NavLink>
-          <NavLink to="/contact" onClick={() => setIsOpen(false)}>
+          <NavLink to="/blogs" onClick={() => setIsOpen(false)}>
             Blogs
           </NavLink>
           <NavLink to="/faq" onClick={() => setIsOpen(false)}>

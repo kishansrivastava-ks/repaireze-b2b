@@ -177,30 +177,6 @@ const Overlay = styled.div`
   transition: opacity 0.5s ease-out;
 `;
 
-// const Content = styled.div`
-//   position: relative;
-//   z-index: 10;
-//   display: flex;
-//   align-items: flex-start;
-//   gap: 1rem;
-
-//   h3 {
-//     font-size: 1.125rem;
-//     font-weight: bold;
-//     color: var(--color-primary);
-//     transition: color 0.5s ease-out;
-//     margin-bottom: 0.5rem;
-//   }
-
-//   p {
-//     font-size: 0.875rem;
-//     color: var(--color-muted);
-//     line-height: 1.5;
-//     transition: color 0.5s ease-out;
-//     color: var(--color-primary);
-//   }
-// `;
-
 const WhyRepaireze = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
   const itemRefs = useRef([]);
