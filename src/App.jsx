@@ -13,10 +13,12 @@ import FAQs from "./pages/FAQs";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Blogs from "./pages/Blogs";
+// import { Toaster } from "@/components/ui/toaster";
+import { ToastProvider } from "./components/ui/toast";
 
 function App() {
   return (
-    <>
+    <ToastProvider>
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -40,7 +42,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+      {/* <Toaster /> */}
+    </ToastProvider>
   );
 }
 
