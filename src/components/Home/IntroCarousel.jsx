@@ -15,7 +15,7 @@ const images = [
     id: 2,
     url: "/api/placeholder/intro2.jpg",
     alt: "Modern solutions",
-    caption: "Building Tomorrow's Technology Today",
+    caption: "Creating B2B webhooks for a seamless service experience",
     // subCaption: "Advanced solutions powering digital transformation",
   },
   {
@@ -23,7 +23,7 @@ const images = [
     url: "/api/placeholder/intro3.png",
     alt: "Creative workspace",
     caption:
-      "Let us go Green to get our planet clean \n With REPAIREZE Deep Cleaning Services ",
+      "360 degrees fully mechanized deep cleaning for a long-lasting impact",
     // subCaption: "Delivering quality through innovation and dedication",
   },
   // {
@@ -38,7 +38,7 @@ const images = [
     url: "/api/placeholder/intro5.png",
     alt: "Future forward",
     caption:
-      "Precision Carpentry, Impeccable Results With REPAIREZE Carpenter service",
+      "Precision Carpenter works for a better finish using high-end industrial tools",
     // subCaption: "Pioneering the future of technology and innovation",
   },
 ];

@@ -22,16 +22,18 @@ const StyledNavbar = styled.nav`
 
   .nav-links {
     display: flex;
-    gap: 2rem;
+    justify-content: center;
+    gap: 2.5rem;
     margin: 0 15rem;
     flex-basis: 60%;
+    /* border: 1px solid red; */
 
     @media (max-width: 768px) {
       display: none;
     }
 
     a {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 500;
       color: var(--color-text);
       text-decoration: none;
@@ -351,7 +353,7 @@ function Navbar() {
               ))}
             </ServicesDropDown>
           </OurServices>
-          <NavLink to="/brands">Choose Brands</NavLink>
+          {/* <NavLink to="/brands">Choose Brands</NavLink> */}
           <NavLink to="/blogs">Blogs</NavLink>
           <NavLink to="/faq">FAQs</NavLink>
           <NavLink to="/about">About Us</NavLink>

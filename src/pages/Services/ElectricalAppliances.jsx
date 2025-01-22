@@ -8,17 +8,12 @@ import QueryForm from "../../utils/QueryForm";
 function ElectricalAppliances() {
   const content = {
     title:
-      "Electrical Appliance Service: Professional Care for Your Home Essentials",
+      "Electrical Appliance Service: Professional Care of Your Business Premise",
     description:
-      `Experience top-tier electrical appliance service with Repaireze{" "}
-            {` -
-      `}
-            your trusted expert for all your home appliance needs. Our team of
-            experienced professionals is committed to providing exceptional
-            service and support for all your electrical appliances.`,
+      "Experience top-tier electrical appliance service with Repaireze your trusted expert for all your home appliance needs. Our team of experienced professionals is committed to providing exceptional service and support for all your electrical appliances.",
     bulletPoints: [
-      "Expert repairs and maintenance for all major household appliances",
-      "Fast response time with same-day service availability",
+      "Expert repairs and maintenance for all major appliances",
+      "Fast response time with “Get Quotation within 2 hours” after site investigation",
       "Certified technicians with years of specialized experience",
       "Comprehensive service warranty on all repairs",
     ],
