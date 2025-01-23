@@ -44,21 +44,57 @@ const Container = styled.div`
 
 const ControlsContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
   background: white;
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+`;
+const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+`;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+const SearchInput = styled.input`
+  width: 100%;
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+  border: 2px solid transparent;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: var(--color-primary);
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 `;
 
+const SearchButton = styled.button`
+  position: absolute;
+  right: 5px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  padding: 0;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 const SearchContainer = styled.div`
   flex: 1;
   position: relative;
@@ -69,20 +105,6 @@ const SearchContainer = styled.div`
     top: 50%;
     transform: translateY(-50%);
     color: var(--color-secondary);
-  }
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.75rem;
-  border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
-  outline: none;
-  transition: all 0.3s ease;
-
-  &:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
   }
 `;
 
@@ -115,6 +137,61 @@ const FilterButton = styled.button`
 
 const SortButton = styled(FilterButton)`
   min-width: 140px;
+`;
+
+const DropdownWrapper = styled.div`
+  position: relative;
+`;
+
+const DropdownButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 200px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+
+  ${DropdownWrapper}:hover & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+`;
+const DropdownItem = styled.button`
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
 `;
 
 const BlogGrid = styled.div`
@@ -357,6 +434,8 @@ const BlogSection = () => {
   const itemRefs = useRef([]);
   const { toast } = useToast();
   const ITEMS_PER_PAGE = 6;
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
   // Simulated blog data fetch
   useEffect(() => {
@@ -487,7 +566,7 @@ const BlogSection = () => {
   return (
     <Section>
       <Container>
-        <ControlsContainer>
+        {/* <ControlsContainer>
           <SearchContainer>
             <Search className="icon" size={20} />
             <SearchInput
@@ -521,6 +600,71 @@ const BlogSection = () => {
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </FilterButton>
             ))}
+          </FiltersGroup>
+        </ControlsContainer> */}
+
+        <ControlsContainer>
+          <SearchWrapper>
+            <SearchInput
+              placeholder="Search blogs..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <SearchButton
+              onClick={() => {
+                /* Perform search */
+              }}
+            >
+              <Search size={18} />
+            </SearchButton>
+          </SearchWrapper>
+
+          <FiltersGroup>
+            <DropdownWrapper>
+              <DropdownButton onClick={() => setIsSortOpen(!isSortOpen)}>
+                <SortDesc size={18} />
+                Sort: {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
+              </DropdownButton>
+              {isSortOpen && (
+                <DropdownMenu>
+                  {["latest", "popular", "comments"].map((option) => (
+                    <DropdownItem
+                      key={option}
+                      onClick={() => {
+                        setSortBy(option);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option.charAt(0).toUpperCase() + option.slice(1)}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              )}
+            </DropdownWrapper>
+
+            <DropdownWrapper>
+              <DropdownButton onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
+                <Filter size={18} />
+                Category:{" "}
+                {activeCategory.charAt(0).toUpperCase() +
+                  activeCategory.slice(1)}
+              </DropdownButton>
+              {isFiltersOpen && (
+                <DropdownMenu>
+                  {categories.map((category) => (
+                    <DropdownItem
+                      key={category}
+                      onClick={() => {
+                        setActiveCategory(category);
+                        setIsFiltersOpen(false);
+                      }}
+                    >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              )}
+            </DropdownWrapper>
           </FiltersGroup>
         </ControlsContainer>
 
