@@ -9,6 +9,10 @@ const Section = styled.section`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
 `;
 
 const Container = styled.div`
@@ -27,9 +31,13 @@ const MainHeading = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 2.75rem;
+    text-align: center;
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    /* border: 1px solid red; */
   }
 `;
-
 const TestimonialGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -39,6 +47,7 @@ const TestimonialGrid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 2rem;
+    /* border: 1px solid red; */
   }
 `;
 
@@ -52,6 +61,12 @@ const ImageContainer = styled.div`
       props.isAnimating ? (props.direction === "next" ? "-20px" : "20px") : "0"}
   );
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+  @media (max-width: 768px) {
+    /* aspect-ratio: 16/9; */
+    max-width: 98%;
+    /* border: 2px solid blue; */
+  }
 `;
 
 const Image = styled.img`
@@ -59,6 +74,9 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  @media (max-width: 768px) {
+    /* border: 2px solid blue; */
+  }
 `;
 
 const QuoteCircle = styled.div`
@@ -72,6 +90,13 @@ const QuoteCircle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 3rem;
+    height: 3rem;
+    top: -1.25rem;
+    right: -1.25rem;
+  }
 `;
 
 const ContentColumn = styled.div`
@@ -84,13 +109,23 @@ const ContentColumn = styled.div`
       props.isAnimating ? (props.direction === "next" ? "20px" : "-20px") : "0"}
   );
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const TestimonialHeading = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
   color: var(--color-primary);
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const TestimonialText = styled.p`
@@ -98,6 +133,12 @@ const TestimonialText = styled.p`
   color: var(--color-muted);
   margin-bottom: 2rem;
   line-height: 2;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ReviewerName = styled.p`
@@ -105,16 +146,25 @@ const ReviewerName = styled.p`
   font-weight: bold;
   color: var(--color-primary);
   margin-bottom: 0.25rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ReviewerRole = styled.p`
   color: var(--color-muted);
+  font-size: 0.95rem;
 `;
 
 const NavigationContainer = styled.div`
   display: flex;
   gap: 1.5rem;
   align-items: center;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 const NavButton = styled.button`
@@ -125,6 +175,8 @@ const NavButton = styled.button`
   transition: transform 0.2s ease;
   display: flex;
   align-items: center;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
 
   &:hover {
     transform: scale(1.1);
@@ -135,14 +187,14 @@ const NavButton = styled.button`
   }
 
   svg {
-    width: 2.5rem;
-    height: 1rem;
+    width: 3.5rem;
+    height: 1.5rem;
     color: var(--color-primary);
     transition: color 0.2s ease;
 
-    &:hover {
-      /* color: var(--color-primary-dark); */
-      color: #fff;
+    @media (max-width: 768px) {
+      width: 2rem;
+      height: 1rem;
     }
   }
 `;

@@ -27,7 +27,10 @@ const Title = styled.h2`
   margin-bottom: var(--spacing-md);
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+    /* border: 1px solid red; */
+    text-align: center;
   }
 `;
 

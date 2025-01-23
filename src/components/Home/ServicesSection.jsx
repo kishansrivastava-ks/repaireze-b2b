@@ -70,7 +70,7 @@ const Container = styled.div`
     @media (max-width: 768px) {
       font-size: 2rem;
       margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      letter-spacing: 1px;
     }
 
     @media (min-width: 769px) {
