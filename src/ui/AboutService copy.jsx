@@ -4,15 +4,10 @@ import styled from "styled-components";
 const Section = styled.section`
   padding: 5rem;
   background: #fff;
-
-  @media (max-width: 768px) {
-    padding: 2.5rem 1rem;
-  }
 `;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 `;
@@ -27,15 +22,10 @@ const Title = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 2rem;
-    text-align: center;
   }
 `;
 
-const Description = styled.div`
-  @media (max-width: 768px) {
-    text-align: center;
-  }
-`;
+const Description = styled.div``;
 
 const Paragraph = styled.p`
   font-size: 1.125rem;
@@ -43,10 +33,6 @@ const Paragraph = styled.p`
   color: var(--color-text);
   opacity: 0.9;
   margin-bottom: 1.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
 `;
 
 const BulletList = styled.ul`
@@ -57,10 +43,6 @@ const BulletList = styled.ul`
   padding: 0;
   margin: 2rem auto;
   text-align: left;
-
-  @media (max-width: 768px) {
-    align-items: center;
-  }
 `;
 
 const BulletItem = styled.li`
@@ -70,12 +52,6 @@ const BulletItem = styled.li`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    max-width: 300px;
-    text-align: left;
-  }
 
   &:before {
     content: "";

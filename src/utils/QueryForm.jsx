@@ -8,17 +8,24 @@ const Section = styled.section`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
 `;
 
 const Container = styled.div`
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
-  /* margin-bottom: 4rem; */
 
   h2 {
     font-size: 3rem;
@@ -33,6 +40,10 @@ const Header = styled.div`
   p {
     font-size: 1.25rem;
     color: var(--color-muted);
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -40,8 +51,11 @@ const FormContainer = styled.form`
   background: transparent;
   padding: 3rem;
   border-radius: var(--border-radius-lg);
-`;
 
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+`;
 const InputGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -64,7 +78,7 @@ const InputGroup = styled.div`
   label {
     position: absolute;
     left: 1rem;
-    top: -0.5rem;
+    top: -0.65rem;
     font-size: 0.875rem;
     color: var(--color-muted);
     pointer-events: none;
@@ -72,6 +86,7 @@ const InputGroup = styled.div`
     transition: transform 0.3s ease, color 0.3s ease;
     background: white;
     padding: 0 0.5rem;
+    border-radius: 10px;
   }
 
   input:focus ~ label,
@@ -107,6 +122,10 @@ const InputGroup = styled.div`
   textarea {
     height: 150px;
     resize: vertical;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 

@@ -9,8 +9,8 @@ const Section = styled.section`
   transition: all 0.7s ease-out;
   background: #ffffff;
 
-  @media (min-width: 768px) {
-    padding: 3rem 0;
+  @media (max-width: 768px) {
+    padding: 1.5rem 0;
   }
 `;
 
@@ -25,10 +25,9 @@ const ImageWrapper = styled.div`
   aspect-ratio: 21/9;
   overflow: hidden;
   border-radius: 0.75rem;
-  /* box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); */
 
-  @media (min-width: 768px) {
-    aspect-ratio: 23/9;
+  @media (max-width: 768px) {
+    aspect-ratio: 16/9;
   }
 `;
 
@@ -75,8 +74,8 @@ const CaptionOverlay = styled.div`
   transition: all 0.7s ease-out;
   transition-delay: 100ms;
 
-  @media (min-width: 768px) {
-    padding: 5rem 2.5rem 2rem;
+  @media (max-width: 768px) {
+    padding: 3rem 1rem 1.5rem;
   }
 `;
 
@@ -88,8 +87,8 @@ const Caption = styled.h2`
   line-height: 1.2;
   letter-spacing: 2px;
 
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
   }
 
   @media (min-width: 1024px) {
@@ -97,6 +96,7 @@ const Caption = styled.h2`
   }
 `;
 
+// Entire functional component remains unchanged
 const InfoImageContainer = ({ imageSrc, caption, alt = "Featured Image" }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

@@ -41,26 +41,26 @@ const features = [
 ];
 
 const Section = styled.section`
-  padding: 4rem 0; // Reduced padding on mobile
+  padding: 6rem 0;
   background-color: #fff;
 
-  @media (min-width: 768px) {
-    padding: 6rem 0;
+  @media (max-width: 768px) {
+    padding: 2rem 0;
   }
 `;
 
 const Container = styled.div`
-  width: 92%; // Slightly wider on mobile for better spacing
+  width: 92%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem; // Added padding for mobile
+  padding: 0 1rem;
 
   & > div {
-    margin-bottom: 2rem; // Added margin for better section spacing on mobile
-    text-align: center; // Center align on mobile
+    margin-bottom: 2rem;
+    text-align: center;
 
     & > h2 {
-      font-size: 2rem; // Smaller font on mobile
+      font-size: 2rem;
       font-weight: bold;
       color: var(--color-primary);
       line-height: 1.2;
@@ -73,7 +73,7 @@ const Container = styled.div`
     }
 
     @media (min-width: 768px) {
-      text-align: left; // Left align on desktop
+      text-align: left;
       & > h2 {
         font-size: 3rem;
       }
@@ -86,8 +86,8 @@ const Container = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr; // Single column on mobile
-  gap: 1.25rem; // Reduced gap on mobile
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -102,7 +102,7 @@ const Grid = styled.div`
 const Card = styled.div`
   position: relative;
   overflow: hidden;
-  padding: 1.25rem; // Slightly reduced padding on mobile
+  padding: 1.25rem;
   border-radius: 0.5rem;
   background: linear-gradient(
     to bottom right,
@@ -116,11 +116,9 @@ const Card = styled.div`
   cursor: pointer;
 
   @media (max-width: 767px) {
-    transform: none; // Disable transform on mobile for better performance
-    opacity: 1; // Always visible on mobile
+    transform: none;
+    opacity: 1;
   }
-
-  // Rest of the Card styles remain the same
 `;
 
 const Content = styled.div`
@@ -128,16 +126,16 @@ const Content = styled.div`
   z-index: 10;
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem; // Reduced gap on mobile
+  gap: 0.75rem;
 
   @media (max-width: 767px) {
-    flex-direction: column; // Stack icon and text on mobile
+    flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
   h3 {
-    font-size: 1rem; // Smaller font on mobile
+    font-size: 1rem;
     font-weight: bold;
     color: var(--color-primary);
     transition: color 0.5s ease-out;

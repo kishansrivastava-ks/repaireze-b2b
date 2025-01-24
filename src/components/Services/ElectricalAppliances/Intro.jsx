@@ -7,6 +7,9 @@ const Section = styled.section`
   padding: 1rem 0;
   padding-top: 6rem;
   background: white;
+  @media (max-width: 768px) {
+    padding-top: 1rem;
+  }
 `;
 
 const Container = styled.div`
@@ -30,7 +33,10 @@ const IntroHeader = styled.div`
     gap: 1rem;
 
     @media (max-width: 768px) {
-      font-size: 2rem;
+      /* font-size: 1.7rem; */
+      line-height: 1.3;
+      text-align: center;
+      font-weight: 500;
     }
   }
 
@@ -40,6 +46,9 @@ const IntroHeader = styled.div`
     color: var(--color-text);
     margin-bottom: 1.5rem;
     opacity: 0.8;
+    @media (max-width: 768px) {
+      text-align: center;
+    }
   }
 `;
 

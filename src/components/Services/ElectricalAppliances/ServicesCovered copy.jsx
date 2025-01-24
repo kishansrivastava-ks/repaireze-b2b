@@ -80,23 +80,12 @@ const Section = styled.section`
   background: white;
 `;
 
-// const Container = styled.div`
-//   width: 90%;
-//   max-width: 1200px;
-//   margin: 0 auto;
-// `;
-
 const Container = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  /* padding: 0 15px; */
-
-  @media (max-width: 768px) {
-    /* width: 100%; */
-    padding: 0 15px;
-  }
 `;
+
 const SectionHeader = styled.div`
   text-align: left;
   /* margin-bottom: 3rem; */
@@ -114,14 +103,8 @@ const SectionHeader = styled.div`
     gap: 1rem;
 
     @media (max-width: 768px) {
-      font-size: 1.75rem;
-      gap: 0.5rem;
-      align-items: center;
-      font-weight: 500;
+      font-size: 2rem;
     }
-  }
-  @media (max-width: 768px) {
-    text-align: center;
   }
 `;
 
@@ -130,11 +113,6 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-bottom: 4rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 `;
 
 const ServiceCard = styled.div`
