@@ -11,6 +11,10 @@ const Container = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 0 0.5rem;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -43,6 +47,14 @@ const Title = styled.h2`
     color: var(--color-secondary-dark);
     margin-bottom: 0.5rem;
   }
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+    text-align: center;
+
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 const Description = styled.div`
@@ -52,6 +64,14 @@ const Description = styled.div`
   p {
     margin-bottom: 1.5rem;
     color: var(--color-primary);
+  }
+  @media (max-width: 480px) {
+    p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
   }
 `;
 
@@ -81,6 +101,13 @@ const StatCard = styled.div`
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+
+    &:hover {
+      transform: none;
+    }
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -94,6 +121,10 @@ const IconWrapper = styled.div`
   margin: 0 auto 1rem;
   /* color: var(--color-primary); */
   color: #fff;
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const StatTitle = styled.h4`

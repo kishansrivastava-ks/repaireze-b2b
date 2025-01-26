@@ -6,7 +6,7 @@ import QueryForm from "../../utils/QueryForm";
 
 function Carpentry() {
   const content = {
-    title: "Electrical Services: Safe and Reliable Power Solutions",
+    title: "Safe and Reliable Power Solutions",
     description:
       "Trust PowerPro for all your electrical needs. Our certified electricians provide comprehensive electrical services with a focus on safety, reliability, and efficiency. From minor repairs to complete electrical system installations, we ensure your property's electrical infrastructure meets the highest standards of performance and safety.",
     bulletPoints: [

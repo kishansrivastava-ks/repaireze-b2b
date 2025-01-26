@@ -6,7 +6,7 @@ import QueryForm from "../../utils/QueryForm";
 
 function Plumbing() {
   const content = {
-    title: "Plumbing Services: Expert Solutions for All Your Plumbing Needs",
+    title: "Expert Solutions for All Your Plumbing Needs",
     description:
       "Count on FlowFix for reliable and efficient plumbing solutions. Our licensed plumbers deliver professional service for both emergency repairs and routine maintenance, using the latest tools and techniques to ensure your plumbing system runs smoothly and efficiently.",
     bulletPoints: [

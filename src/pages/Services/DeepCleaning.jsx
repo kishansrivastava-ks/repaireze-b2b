@@ -6,8 +6,7 @@ import QueryForm from "../../utils/QueryForm";
 
 function DeepCleaning() {
   const content = {
-    title:
-      "Deep Cleaning Service: Transform Your Space with Professional Excellence",
+    title: "Transform Your Space with Professional Excellence",
     description:
       "Experience the difference of professional deep cleaning with Cleanex - your trusted partner for comprehensive cleaning solutions. Our skilled cleaning specialists use advanced techniques and premium products to restore and refresh your space, ensuring a healthier and more pleasant environment.",
     bulletPoints: [

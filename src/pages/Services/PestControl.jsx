@@ -6,8 +6,7 @@ import QueryForm from "../../utils/QueryForm";
 
 function PestControl() {
   const content = {
-    title:
-      "Pest Control Service: Professional Solutions for a Pest-Free Environment",
+    title: "Professional Solutions for a Pest-Free Environment",
     description:
       "Trust SecurePest for comprehensive pest management solutions that protect your space. Our certified pest control specialists employ targeted treatments and preventive measures to effectively eliminate pest problems while ensuring the safety of your family and pets.",
     bulletPoints: [

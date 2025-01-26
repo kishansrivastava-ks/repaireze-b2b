@@ -10,6 +10,10 @@ const HeroContainer = styled.div`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
   transition: all 1s ease-out;
+  @media (max-width: 480px) {
+    height: 90dvh;
+    height: 70dvh;
+  }
 `;
 
 const BackgroundImage = styled.div`
@@ -36,6 +40,9 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 `;
 
 const ContentInner = styled.div`
@@ -54,10 +61,6 @@ const Title = styled.h1`
   transition: all 0.7s ease-out;
   transition-delay: 300ms;
   line-height: 1.2;
-
-  @media (min-width: 768px) {
-    font-size: 3rem;
-  }
 `;
 
 const Description = styled.p`
@@ -68,6 +71,11 @@ const Description = styled.p`
   transition: all 0.7s ease-out;
   transition-delay: 500ms;
   line-height: 1.6;
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    /* line-height: 1.5; */
+    text-align: justify;
+  }
 `;
 
 const Highlight = styled.span`

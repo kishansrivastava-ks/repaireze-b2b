@@ -51,6 +51,10 @@ const Section = styled.div`
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   padding: 3rem 1rem;
   overflow: hidden;
+  @media (max-width: 480px) {
+    padding: 1rem;
+    min-height: auto;
+  }
 `;
 
 const Container = styled.div`
@@ -78,8 +82,8 @@ const Title = styled.h2`
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 
@@ -87,6 +91,10 @@ const Subtitle = styled.p`
   font-size: 1.25rem;
   color: var(--color-primary);
   line-height: 1.8;
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 `;
 
 const ProcessContainer = styled.div`
@@ -106,6 +114,7 @@ const StepsWrapper = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 `;
 
@@ -128,12 +137,26 @@ const Step = styled.div`
   transform: translateY(${(props) => (props.isVisible ? "0" : "40px")});
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: ${(props) => props.delay}ms;
+  @media (max-width: 768px) {
+    display: flex;
+    gap: 1rem;
+  }
 `;
 
 const IconContainer = styled.div`
   position: relative;
   margin-bottom: 2rem;
   z-index: 2;
+  @media (max-width: 480px) {
+    width: 3rem;
+    height: 3rem;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    display: none;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -158,6 +181,15 @@ const IconWrapper = styled.div`
   &:hover {
     transform: scale(1.1);
   }
+  @media (max-width: 480px) {
+    width: 3rem;
+    height: 3rem;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `;
 
 const ContentCard = styled.div`
@@ -174,6 +206,15 @@ const ContentCard = styled.div`
   &:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.1);
+  }
+  @media (max-width: 480px) {
+    padding: 1rem;
+    border-radius: 10px;
+    /* border: 2px solid red; */
+    margin-bottom: 1rem;
+    &:hover {
+      transform: none;
+    }
   }
 `;
 

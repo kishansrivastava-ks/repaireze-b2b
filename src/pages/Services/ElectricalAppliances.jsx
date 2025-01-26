@@ -7,8 +7,7 @@ import QueryForm from "../../utils/QueryForm";
 
 function ElectricalAppliances() {
   const content = {
-    title:
-      "Electrical Appliance Service: Professional Care of Your Business Premise",
+    title: "Professional Care of Your Business Premise",
     description:
       "Experience top-tier electrical appliance service with Repaireze your trusted expert for all your home appliance needs. Our team of experienced professionals is committed to providing exceptional service and support for all your electrical appliances.",
     bulletPoints: [

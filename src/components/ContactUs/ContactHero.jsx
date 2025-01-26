@@ -6,11 +6,15 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 const HeroContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 28rem;
+  /* height: 30rem; */
+  height: 90vh;
   overflow: hidden;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
   transition: all 1s ease-out;
+  @media (max-width: 480px) {
+    height: 90dvh;
+  }
 `;
 
 const BackgroundImage = styled.div`
@@ -20,6 +24,8 @@ const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  @media (max-width: 480px) {
+  }
 `;
 
 const Overlay = styled.div`
@@ -37,6 +43,9 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 `;
 
 const ContentInner = styled.div`
@@ -55,10 +64,6 @@ const Title = styled.h1`
   transition: all 0.7s ease-out;
   transition-delay: 300ms;
   line-height: 1.2;
-
-  @media (min-width: 768px) {
-    font-size: 3rem;
-  }
 `;
 
 const Description = styled.p`
@@ -83,8 +88,9 @@ const QuickInfoContainer = styled.div`
   transition: all 0.7s ease-out;
   transition-delay: 700ms;
 
-  @media (max-width: 640px) {
+  @media (max-width: 480px) {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 `;
 
@@ -123,6 +129,22 @@ const InfoItem = styled.div`
   .value {
     font-size: 1rem;
     font-weight: 500;
+  }
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    gap: 0.5rem;
+
+    .icon {
+      size: 20px;
+    }
+
+    .label {
+      font-size: 0.75rem;
+    }
+
+    .value {
+      font-size: 0.875rem;
+    }
   }
 `;
 

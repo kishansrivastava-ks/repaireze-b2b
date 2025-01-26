@@ -6,7 +6,7 @@ import QueryForm from "../../utils/QueryForm";
 
 function Carpentry() {
   const content = {
-    title: "Carpentry Services: Crafting Excellence in Wood and Design",
+    title: "Crafting Excellence in Wood and Design",
     description:
       "Choose WoodMasters for exceptional carpentry that combines traditional craftsmanship with modern techniques. Our skilled carpenters specialize in both aesthetic and structural woodwork, delivering custom solutions that enhance the beauty and functionality of your space.",
     bulletPoints: [
