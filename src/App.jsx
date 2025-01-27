@@ -15,35 +15,49 @@ import ContactUs from "./pages/ContactUs";
 import Blogs from "./pages/Blogs";
 // import { Toaster } from "@/components/ui/toaster";
 import { ToastProvider } from "./components/ui/toast";
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
-    <ToastProvider>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route path="" element={<Home />} />
-            <Route
-              path="services/electrical-appliances"
-              element={<ElectricalAppliances />}
-            />
-            <Route path="services/deep-cleaning" element={<DeepCleaning />} />
-            <Route path="services/pest-control" element={<PestControl />} />
-            <Route path="services/plumbing" element={<Plumbing />} />
-            <Route path="services/carpentry" element={<Carpentry />} />
-            <Route path="services/electrical" element={<Electrical />} />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.3 }}
+    >
+      <ToastProvider>
+        <GlobalStyles />
+        <BrowserRouter>
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route path="" element={<Home />} />
+                <Route
+                  path="services/electrical-appliances"
+                  element={<ElectricalAppliances />}
+                />
+                <Route
+                  path="services/deep-cleaning"
+                  element={<DeepCleaning />}
+                />
+                <Route path="services/pest-control" element={<PestControl />} />
+                <Route path="services/plumbing" element={<Plumbing />} />
+                <Route path="services/carpentry" element={<Carpentry />} />
+                <Route path="services/electrical" element={<Electrical />} />
 
-            <Route path="/brands" element={<Brands />} />
-            <Route path="/faq" element={<FAQs />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/blogs" element={<Blogs />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      {/* <Toaster /> */}
-    </ToastProvider>
+                <Route path="/brands" element={<Brands />} />
+                <Route path="/faq" element={<FAQs />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/blogs" element={<Blogs />} />
+              </Route>
+            </Routes>
+          </AnimatePresence>
+        </BrowserRouter>
+        {/* <Toaster /> */}
+      </ToastProvider>
+    </motion.div>
   );
 }
 

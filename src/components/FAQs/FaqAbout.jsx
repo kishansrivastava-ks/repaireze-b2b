@@ -75,6 +75,17 @@ const ContactPrompt = styled.div`
       transform: translateY(-5px);
     }
   }
+  @media (max-width: 480px) {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+    letter-spacing: 0.5px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 `;
 
 const FaqAbout = () => {

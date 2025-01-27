@@ -191,14 +191,14 @@ const ContactHero = () => {
               <MapPin className="icon" size={24} />
               <div className="content">
                 <span className="label">Visit Us</span>
-                <span className="value">123 Repair Street, Tech City</span>
+                <span className="value">320A, Uttam Nagar, Delhi</span>
               </div>
             </InfoItem>
             <InfoItem>
               <Phone className="icon" size={24} />
               <div className="content">
                 <span className="label">Call Us</span>
-                <span className="value">+1 (555) 123-4567</span>
+                <span className="value">+91 8860887541</span>
               </div>
             </InfoItem>
             <InfoItem>

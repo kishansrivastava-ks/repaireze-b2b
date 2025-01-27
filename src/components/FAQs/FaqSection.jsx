@@ -5,6 +5,9 @@ import { Search, ChevronDown, ChevronUp } from "lucide-react";
 const Section = styled.section`
   padding: 4rem 0;
   background: white;
+  @media (max-width: 480px) {
+    padding: 2rem 0;
+  }
 `;
 
 const Container = styled.div`
@@ -40,6 +43,11 @@ const SearchInput = styled.input`
     border-color: var(--color-primary);
     box-shadow: 0 0 0 4px var(--color-primary-light);
   }
+  @media (max-width: 480px) {
+    padding: 0.75rem 1rem;
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const SearchIcon = styled.div`
@@ -48,6 +56,14 @@ const SearchIcon = styled.div`
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-muted);
+  @media (max-width: 480px) {
+    left: 0.75rem;
+    top: 50%;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `;
 
 const CategoriesContainer = styled.div`
@@ -81,6 +97,11 @@ const CategoryButton = styled.button`
     transform: translateY(-2px);
     color: #fff;
   }
+  @media (max-width: 480px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
 `;
 
 const FaqGrid = styled.div`
@@ -90,6 +111,7 @@ const FaqGrid = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 `;
 
@@ -125,6 +147,9 @@ const FaqHeader = styled.div`
     button {
       color: white;
     }
+  }
+  @media (max-width: 480px) {
+    padding: 1rem;
   }
 `;
 

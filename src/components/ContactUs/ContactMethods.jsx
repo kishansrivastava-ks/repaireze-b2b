@@ -201,8 +201,8 @@ const ContactMethods = () => {
       title: "Call or Message",
       content: (
         <>
-          <ContactLink href="tel:+1234567890">+1 (234) 567-890</ContactLink>
-          <ContactLink href="tel:+1234567891">+1 (234) 567-891</ContactLink>
+          <ContactLink href="tel:+91 8860887541">+91 8860887541</ContactLink>
+          <ContactLink href="tel:+91 9821212667">+91 9821212667</ContactLink>
           <InfoItem>Available for WhatsApp & SMS</InfoItem>
         </>
       ),
@@ -229,13 +229,14 @@ const ContactMethods = () => {
     },
     {
       icon: <MapPin size={24} />,
-      title: "Visit Our Store",
+      title: "Visit Us",
       content: (
         <>
           <InfoList>
             <InfoItem>
-              <MapPin size={16} />
-              123 Repair Street, Tech City
+              <MapPin size={19} />
+              New Delhi PLot No. 320-A, Block P, <br /> Uttam Nagar, East Delhi
+              - 110059
             </InfoItem>
             <InfoItem>
               <Clock size={16} />
