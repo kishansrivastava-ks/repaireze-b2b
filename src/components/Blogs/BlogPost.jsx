@@ -20,6 +20,7 @@ import {
   Copy,
 } from "lucide-react";
 import { format } from "date-fns";
+import PageTransition from "../../utils/PageTransition";
 
 // Styled Components
 const PageContainer = styled.div`
@@ -420,127 +421,131 @@ export default function BlogPost() {
   if (!blog) return null;
 
   return (
-    <PageContainer>
-      <HeroSection>
+    <PageTransition>
+      <PageContainer>
+        <HeroSection>
+          <Container>
+            <BackButton onClick={() => navigate(-1)}>
+              <ArrowLeft size={20} />
+              Back to Blogs
+            </BackButton>
+
+            <TagsContainer>
+              <CategoryTag>{blog.category}</CategoryTag>
+              {blog.tags.map((tag) => (
+                <StyledTag key={tag}>{tag}</StyledTag>
+              ))}
+            </TagsContainer>
+
+            <Title>{blog.title}</Title>
+
+            <MetaInfo>
+              <MetaItem>
+                <User size={18} />
+                <span>{blog.author}</span>
+              </MetaItem>
+              <MetaItem>
+                <Calendar size={18} />
+                <time>{format(new Date(blog.created_at), "MMMM d, yyyy")}</time>
+              </MetaItem>
+              <MetaItem>
+                <Clock size={18} />
+                <span>{blog.read_time_minutes} min read</span>
+              </MetaItem>
+            </MetaInfo>
+          </Container>
+        </HeroSection>
+
         <Container>
-          <BackButton onClick={() => navigate(-1)}>
-            <ArrowLeft size={20} />
-            Back to Blogs
-          </BackButton>
+          <MainContent>
+            <Article>
+              <FeaturedImage>
+                <img src={`/api/placeholder/blog-card.jpg`} alt={blog.title} />
+              </FeaturedImage>
 
-          <TagsContainer>
-            <CategoryTag>{blog.category}</CategoryTag>
-            {blog.tags.map((tag) => (
-              <StyledTag key={tag}>{tag}</StyledTag>
-            ))}
-          </TagsContainer>
+              <Content>
+                <p>{blog.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+              </Content>
 
-          <Title>{blog.title}</Title>
-
-          <MetaInfo>
-            <MetaItem>
-              <User size={18} />
-              <span>{blog.author}</span>
-            </MetaItem>
-            <MetaItem>
-              <Calendar size={18} />
-              <time>{format(new Date(blog.created_at), "MMMM d, yyyy")}</time>
-            </MetaItem>
-            <MetaItem>
-              <Clock size={18} />
-              <span>{blog.read_time_minutes} min read</span>
-            </MetaItem>
-          </MetaInfo>
-        </Container>
-      </HeroSection>
-
-      <Container>
-        <MainContent>
-          <Article>
-            <FeaturedImage>
-              <img src={`/api/placeholder/800/400`} alt={blog.title} />
-            </FeaturedImage>
-
-            <Content>
-              <p>{blog.description}</p>
-              <div dangerouslySetInnerHTML={{ __html: blog.content }} />
-            </Content>
-
-            <ActionBar>
-              <ActionButton active={isLiked} onClick={handleLike}>
-                <Heart size={20} />
-                {likesCount} Likes
-              </ActionButton>
-              <ActionButton>
-                <MessageSquare size={20} />
-                {blog.comments_count} Comments
-              </ActionButton>
-            </ActionBar>
-          </Article>
-
-          <Sidebar>
-            <AuthorCard>
-              <AuthorAvatar />
-              <AuthorName>{blog.author}</AuthorName>
-              <AuthorBio>Technical Writer & Industry Expert</AuthorBio>
-            </AuthorCard>
-
-            <Card>
-              <h3>Share this article</h3>
-              <ShareButton onClick={() => handleShare("twitter")}>
-                <Twitter size={18} />
-                Share on Twitter
-              </ShareButton>
-              <ShareButton onClick={() => handleShare("facebook")}>
-                <Facebook size={18} />
-                Share on Facebook
-              </ShareButton>
-              <ShareButton onClick={() => handleShare("linkedin")}>
-                <Linkedin size={18} />
-                Share on LinkedIn
-              </ShareButton>
-              <ShareButton onClick={handleCopyLink}>
-                <Copy size={18} />
-                Copy Link
-              </ShareButton>
-            </Card>
-          </Sidebar>
-        </MainContent>
-
-        <CommentsSection>
-          <h2>Comments ({blog.comments_count})</h2>
-
-          <CommentForm onSubmit={handleCommentSubmit}>
-            <CommentInput
-              placeholder="Add a comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-            <SubmitButton type="submit">
-              <Send size={18} />
-              Post Comment
-            </SubmitButton>
-          </CommentForm>
-
-          {blog.comments.map((comment, index) => (
-            <CommentCard key={index}>
-              <CommentHeader>
-                <CommentAuthor>
-                  <CommentAvatar />
-                  <CommentMeta>
-                    <h4>{comment.username}</h4>
-                    <time>{format(new Date(comment.date), "MMM d, yyyy")}</time>
-                  </CommentMeta>
-                </CommentAuthor>
-                <ActionButton>
-                  <ThumbsUp size={16} />
+              <ActionBar>
+                <ActionButton active={isLiked} onClick={handleLike}>
+                  <Heart size={20} />
+                  {likesCount} Likes
                 </ActionButton>
-              </CommentHeader>
-              <p>{comment.comment}</p>
-            </CommentCard>
-          ))}
-        </CommentsSection>
-      </Container>
-    </PageContainer>
+                <ActionButton>
+                  <MessageSquare size={20} />
+                  {blog.comments_count} Comments
+                </ActionButton>
+              </ActionBar>
+            </Article>
+
+            <Sidebar>
+              <AuthorCard>
+                <AuthorAvatar />
+                <AuthorName>{blog.author}</AuthorName>
+                <AuthorBio>Technical Writer & Industry Expert</AuthorBio>
+              </AuthorCard>
+
+              <Card>
+                <h3>Share this article</h3>
+                <ShareButton onClick={() => handleShare("twitter")}>
+                  <Twitter size={18} />
+                  Share on Twitter
+                </ShareButton>
+                <ShareButton onClick={() => handleShare("facebook")}>
+                  <Facebook size={18} />
+                  Share on Facebook
+                </ShareButton>
+                <ShareButton onClick={() => handleShare("linkedin")}>
+                  <Linkedin size={18} />
+                  Share on LinkedIn
+                </ShareButton>
+                <ShareButton onClick={handleCopyLink}>
+                  <Copy size={18} />
+                  Copy Link
+                </ShareButton>
+              </Card>
+            </Sidebar>
+          </MainContent>
+
+          <CommentsSection>
+            <h2>Comments ({blog.comments_count})</h2>
+
+            <CommentForm onSubmit={handleCommentSubmit}>
+              <CommentInput
+                placeholder="Add a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <SubmitButton type="submit">
+                <Send size={18} />
+                Post Comment
+              </SubmitButton>
+            </CommentForm>
+
+            {blog.comments.map((comment, index) => (
+              <CommentCard key={index}>
+                <CommentHeader>
+                  <CommentAuthor>
+                    <CommentAvatar />
+                    <CommentMeta>
+                      <h4>{comment.username}</h4>
+                      <time>
+                        {format(new Date(comment.date), "MMM d, yyyy")}
+                      </time>
+                    </CommentMeta>
+                  </CommentAuthor>
+                  <ActionButton>
+                    <ThumbsUp size={16} />
+                  </ActionButton>
+                </CommentHeader>
+                <p>{comment.comment}</p>
+              </CommentCard>
+            ))}
+          </CommentsSection>
+        </Container>
+      </PageContainer>
+    </PageTransition>
   );
 }
