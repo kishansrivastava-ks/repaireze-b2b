@@ -17,6 +17,7 @@ import Blogs from "./pages/Blogs";
 import { ToastProvider } from "./components/ui/toast";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
+import BlogPost from "./components/Blogs/BlogPost";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/blogs" element={<Blogs />} />
+                <Route path="/blogs/:id" element={<BlogPost />} />
               </Route>
             </Routes>
           </AnimatePresence>

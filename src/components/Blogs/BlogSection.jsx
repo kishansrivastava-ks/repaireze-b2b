@@ -26,6 +26,7 @@ import {
   ToastDescription,
 } from "../../components/ui/toast";
 import { useToast } from "../../components/ui/toast";
+import { NavLink } from "react-router-dom";
 
 // Styled Components
 const Section = styled.section`
@@ -201,7 +202,26 @@ const BlogGrid = styled.div`
   margin-top: 2rem;
 `;
 
-const BlogCard = styled.div`
+// const BlogCard = styled.div`
+//   background: white;
+//   border-radius: 1rem;
+//   overflow: hidden;
+//   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+//   transition: all 0.3s ease;
+//   opacity: ${(props) => (props.isVisible ? 1 : 0)};
+//   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
+//   transition-delay: ${(props) => props.delay}ms;
+
+//   &:hover {
+//     transform: translateY(-5px);
+//     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+//   }
+// `;
+
+const BlogCard = styled(NavLink)`
+  text-decoration: none;
+  color: inherit;
+  display: block;
   background: white;
   border-radius: 1rem;
   overflow: hidden;
@@ -673,6 +693,7 @@ const BlogSection = () => {
             {currentBlogs.map((blog, index) => (
               <BlogCard
                 key={blog.id}
+                to={`/blogs/${blog.id}`}
                 ref={(el) => (itemRefs.current[index] = el)}
                 isVisible={visibleItems.has(index)}
                 delay={index * 100}
