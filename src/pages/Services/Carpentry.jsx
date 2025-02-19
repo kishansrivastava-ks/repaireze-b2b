@@ -21,7 +21,7 @@ function Carpentry() {
   return (
     <>
       <InfoImageContainer
-        imageSrc="/api/placeholder/intro3.png"
+        imageSrc="/api/placeholder/intro5.png"
         caption="Carpentry services"
       />
       <ServicesCovered />

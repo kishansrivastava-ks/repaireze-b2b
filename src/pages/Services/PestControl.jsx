@@ -21,7 +21,7 @@ function PestControl() {
   return (
     <>
       <InfoImageContainer
-        imageSrc="/api/placeholder/intro3.png"
+        imageSrc="/api/placeholder/img_pestControl.png"
         caption="Pest control services"
       />
       <ServicesCovered />

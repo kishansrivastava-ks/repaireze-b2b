@@ -22,13 +22,14 @@ const Container = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
-  aspect-ratio: 21/9;
+  width: 100%;
+  min-height: 200px; // Minimum height to prevent collapse during loading
   overflow: hidden;
   border-radius: 0.75rem;
-
-  @media (max-width: 768px) {
-    aspect-ratio: 16/9;
-  }
+  background-color: #f9fafb; // Light background for image container
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LoadingSkeleton = styled.div`
@@ -51,8 +52,10 @@ const LoadingSkeleton = styled.div`
 
 const StyledImage = styled.img`
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; // Allow height to adjust based on aspect ratio
+  max-height: 80vh; // Prevent excessive vertical height
+  object-fit: contain; // Show entire image
+  object-position: center;
   opacity: ${(props) => (props.isLoaded ? 1 : 0)};
   transition: opacity 0.5s ease-out;
 `;
