@@ -319,7 +319,7 @@ function Footer() {
             <NavLink to="/about">About Us</NavLink>
             <NavLink to="/contact">Contact Us</NavLink>
             <NavLink to="/terms">Terms and Conditions</NavLink>
-            <NavLink to="/privacy">Privacy Policy</NavLink>
+            <NavLink to="/terms">Privacy Policy</NavLink>
           </div>
         </div>
 
