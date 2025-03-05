@@ -10,9 +10,8 @@ const Section = styled.section`
   transform: translateY(${(props) => (props.isVisible ? "0" : "20px")});
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
-  @media (max-width: 928px) {
+  @media (max-width: 768px) {
     padding: 3rem 1rem;
-    overflow-x: hidden; // Prevent horizontal overflow
   }
 `;
 
@@ -21,11 +20,6 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-
-  @media (max-width: 928px) {
-    width: 95%; // Slightly wider on mobile
-    padding: 0 0.5rem;
-  }
 `;
 
 const MainHeading = styled.h2`
@@ -35,11 +29,13 @@ const MainHeading = styled.h2`
   margin-bottom: 4rem;
   line-height: 1.2;
 
-  @media (max-width: 928px) {
-    font-size: clamp(1.5rem, 6vw, 2.75rem); // Responsive font sizing
+  @media (max-width: 768px) {
+    font-size: 2.75rem;
     text-align: center;
+    font-size: 1.7rem;
     margin-bottom: 2rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    /* border: 1px solid red; */
   }
 `;
 const TestimonialGrid = styled.div`
@@ -48,15 +44,16 @@ const TestimonialGrid = styled.div`
   gap: 3rem;
   margin-bottom: 2rem;
 
-  @media (max-width: 928px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    gap: 2rem;
+    /* border: 1px solid red; */
   }
 `;
 
 const ImageContainer = styled.div`
   position: relative;
+  aspect-ratio: 5/6;
   aspect-ratio: 4.5/3;
   opacity: ${(props) => (props.isAnimating ? 0 : 1)};
   transform: translateX(
@@ -65,10 +62,10 @@ const ImageContainer = styled.div`
   );
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 
-  @media (max-width: 928px) {
-    aspect-ratio: 16/9; // More standard mobile aspect ratio
-    max-width: 100%;
-    margin: 0 auto;
+  @media (max-width: 768px) {
+    /* aspect-ratio: 16/9; */
+    max-width: 98%;
+    /* border: 2px solid blue; */
   }
 `;
 
@@ -94,11 +91,11 @@ const QuoteCircle = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 928px) {
-    width: 2.5rem;
-    height: 2.5rem;
-    top: -1rem;
-    right: -1rem;
+  @media (max-width: 768px) {
+    width: 3rem;
+    height: 3rem;
+    top: -1.25rem;
+    right: -1.25rem;
   }
 `;
 
@@ -125,10 +122,9 @@ const TestimonialHeading = styled.h3`
   color: var(--color-primary);
   margin-bottom: 1.5rem;
 
-  @media (max-width: 928px) {
-    font-size: clamp(1.25rem, 5vw, 1.5rem);
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
     margin-bottom: 1rem;
-    text-align: center;
   }
 `;
 
@@ -138,11 +134,10 @@ const TestimonialText = styled.p`
   margin-bottom: 2rem;
   line-height: 2;
 
-  @media (max-width: 928px) {
-    font-size: clamp(0.95rem, 4vw, 1.1rem);
+  @media (max-width: 768px) {
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    text-align: center;
   }
 `;
 
@@ -167,9 +162,8 @@ const NavigationContainer = styled.div`
   gap: 1.5rem;
   align-items: center;
 
-  @media (max-width: 928px) {
+  @media (max-width: 768px) {
     justify-content: center;
-    gap: 1rem;
   }
 `;
 
@@ -198,9 +192,9 @@ const NavButton = styled.button`
     color: var(--color-primary);
     transition: color 0.2s ease;
 
-    @media (max-width: 928px) {
-      width: 2.5rem;
-      height: 1.25rem;
+    @media (max-width: 768px) {
+      width: 2rem;
+      height: 1rem;
     }
   }
 `;

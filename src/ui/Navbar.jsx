@@ -43,8 +43,15 @@ const StyledNavbar = styled.nav`
       gap: 2rem;
       margin: 0;
     }
+    @media (max-width: 928px) {
+      gap: 1rem;
+    }
 
     a {
+      @media (max-width: 928px) {
+        font-size: 0.9rem;
+      }
+      /* border: 1px solid red; */
       font-size: 1.1rem;
       font-weight: 500;
       color: var(--color-text);

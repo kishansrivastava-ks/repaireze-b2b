@@ -139,6 +139,27 @@ const StyledFooter = styled.div`
       flex-basis: 100%;
     }
   }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    flex-direction: row; /* or column, depending on your design */
+    flex-wrap: wrap; /* to allow wrapping if needed */
+    padding: 2rem 3rem; /* adjust padding for tablets */
+
+    & > div:first-child {
+      flex-basis: 30%; /* adjust as needed */
+      align-items: center;
+      text-align: center;
+    }
+
+    & > div:nth-child(2) {
+      flex-basis: 30%; /* adjust as needed */
+      text-align: center;
+    }
+
+    & > div:nth-child(3) {
+      flex-basis: 100%; /* adjust as needed */
+    }
+  }
 `;
 
 const GetInTouch = styled.div`
@@ -194,6 +215,20 @@ const GetInTouch = styled.div`
         align-items: flex-start;
         justify-content: start;
         gap: 0.5rem;
+      }
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .content {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .container {
+        flex-basis: 45%;
+        padding: 0.5rem;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
       }
     }
   }
