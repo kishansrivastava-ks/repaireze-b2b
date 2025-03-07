@@ -40,14 +40,37 @@ const StyledNavbar = styled.nav`
       margin: 0 5rem;
       gap: 1.5rem;
     }
+    @media (max-width: 1248px) {
+      margin: 0 3rem;
+      flex-basis: 75%;
+      /* border: 2px solid red; */
+    }
+    @media (min-width: 770px) and (max-width: 860px) {
+      margin: 0 2rem;
+      flex-basis: 75%;
+    }
 
     a {
+      @media (max-width: 1244px) {
+        font-size: 0.9rem;
+      }
       @media (max-width: 1028px) {
-        /* border: 2px solid red; */
         font-size: 1rem;
       }
+      @media (max-width: 931px) {
+        font-size: 0.9rem;
+      }
+      @media (max-width: 875px) {
+        font-size: 0.85rem;
+      }
+      @media (max-width: 770px) {
+        font-size: 0.9rem;
+      }
+      @media (min-width: 770px) and (max-width: 860px) {
+        font-size: 0.8rem;
+      }
       /* border: 1px solid red; */
-      font-size: 1.1rem;
+      font-size: 1.1em;
       font-weight: 500;
       color: var(--color-text);
       text-decoration: none;
