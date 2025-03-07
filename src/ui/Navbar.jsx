@@ -20,10 +20,8 @@ const StyledNavbar = styled.nav`
     padding: 1rem 1.5rem;
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: 1028px) {
     /* border: 2px solid red; */
-    justify-content: space-between;
-    gap: 2.5rem;
   }
 
   .nav-links {
@@ -37,19 +35,16 @@ const StyledNavbar = styled.nav`
     @media (max-width: 768px) {
       display: none;
     }
-    @media (max-width: 1025px) {
-      /* border: 1px solid red; */
-      min-width: 70%;
-      gap: 2rem;
-      margin: 0;
-    }
-    @media (max-width: 928px) {
-      gap: 1rem;
+    @media (max-width: 1028px) {
+      /* border: 2px solid red; */
+      margin: 0 5rem;
+      gap: 1.5rem;
     }
 
     a {
-      @media (max-width: 928px) {
-        font-size: 0.9rem;
+      @media (max-width: 1028px) {
+        /* border: 2px solid red; */
+        font-size: 1rem;
       }
       /* border: 1px solid red; */
       font-size: 1.1rem;
