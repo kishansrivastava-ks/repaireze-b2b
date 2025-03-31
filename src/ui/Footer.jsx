@@ -414,7 +414,7 @@ function Footer() {
         </div>
       </StyledFooter>
       <Copyright>
-        Copyright &copy; 2024 Repaireze for Business | All Rights Reserved
+        Copyright &copy; 2025 | Mendt Technologies Pvt Ltd | All Rights Reserved
       </Copyright>
     </>
   );

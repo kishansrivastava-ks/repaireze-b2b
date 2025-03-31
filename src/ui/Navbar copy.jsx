@@ -40,6 +40,49 @@ const StyledNavbar = styled.nav`
       margin: 0 5rem;
       gap: 1.5rem;
     }
+    @media (max-width: 1248```javascript
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+
+const StyledNavbar = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 4rem;
+  background-color: var(--color-surface);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+
+  @media (max-width: 1028px) {
+    /* border: 2px solid red; */
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 0 15rem;
+    flex-basis: 60%;
+    /* border: 1px solid red; */
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+    @media (max-width: 1028px) {
+      /* border: 2px solid red; */
+      margin: 0 5rem;
+      gap: 1.5rem;
+    }
     @media (max-width: 1248px) {
       margin: 0 3rem;
       flex-basis: 75%;
@@ -122,6 +165,289 @@ const StyledNavbar = styled.nav`
     @media (max-width: 1025px) {
       /* width: 15%; */
     }
+  }
+`;
+
+
+
+const Logo = styled.img`
+  max-height: 3rem;
+  transform: scale(1.4) translateY(3px);
+  @media (max-width: 1025px) {
+    max-height: 2rem;
+  }
+`;
+
+const MobileMenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const MobileMenu = styled.div`
+  position: fixed;
+  top: 0;
+  right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+  width: 80%;
+  max-width: 400px;
+  height: 100vh;
+  background: var(--color-surface);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1001;
+  padding: 2rem;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const MobileNavLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+
+  a {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    &.active {
+      color: var(--color-primary);
+      font-weight: bold;
+    }
+  }
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+`;
+
+const MobileSearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  margin-top: 2rem;
+
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    background: transparent;
+  }
+`;
+
+const ServicesDropDown = styled.div`
+  height: auto;
+  width: 16rem;
+  background-color: white;
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateY(-1rem);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow: hidden;
+  padding-right: 2rem;
+`;
+
+const ServiceLink = styled(NavLink)`
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &:hover {
+    color: #fff;
+    transform: translateX(4px);
+  }
+`;
+const OurServices = styled(NavLink)`
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
+  position: relative;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  &:hover ${ServicesDropDown} {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+`;
+
+const OurServicesMobile = styled(NavLink)`
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+`;
+const DropdownMobile = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 4pxpx) {
+      margin: 0 3rem;
+      flex-basis: 75%;
+      /* border: 2px solid red; */
+    }
+    @media (min-width: 770px) and (max-width: 860px) {
+      margin: 0 2rem;
+      flex-basis: 75%;
+    }
+
+    a {
+      @media (max-width: 1244px) {
+        font-size: 0.9rem;
+      }
+      @media (max-width: 1028px) {
+        font-size: 1rem;
+      }
+      @media (max-width: 931px) {
+        font-size: 0.9rem;
+      }
+      @media (max-width: 875px) {
+        font-size: 0.85rem;
+      }
+      @media (max-width: 770px) {
+        font-size: 0.9rem;
+      }
+      @media (min-width: 770px) and (max-width: 860px) {
+        font-size: 0.8rem;
+      }
+      /* border: 1px solid red; */
+      font-size: 1.1em;
+      font-weight: 500;
+      color: var(--color-text);
+      text-decoration: none;
+      position: relative;
+      padding: 0.5rem 0;
+
+      &:hover {
+        color: var(--color-primary);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-primary);
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+
+      &.active {
+        color: var(--color-primary);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .search-icon {
+    font-size: 1rem;
+    color: var(--color-text);
+    cursor: pointer;
+    border: 1px solid var(--color-primary);
+    padding: 0.7rem;
+    border-radius: 5px;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    @media (max-width: 1025px) {
+      /* width: 15%; */
+    }
+  }
+`;
+
+const LogoContainer = styled(NavLink)`
+  height: 100%;
+
+  @media (max-width: 768px) {
+    transform: scale(0.9);
+  }
+
+  @media (max-width: 1025px) {
   }
 `;
 
@@ -310,41 +636,14 @@ const DropdownMobile = styled.div`
   top: 100%;
   padding: 1rem;
   background: white;
-  box-shadow: 0 4px;
-
-  .search-icon {
-    font-size: 1rem;
-    color: var(--color-text);
-    cursor: pointer;
-    border: 1px solid var(--color-primary);
-    padding: 0.7rem;
-    border-radius: 5px;
-
-    &:hover {
-      color: var(--color-primary);
-    }
-
-    @media (max-width: 768px) {
-      display: none;
-    }
-
-    @media (max-width: 1025px) {
-      /* width: 15%; */
-    }
-  }
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform-origin: top;
+  transform: scaleY(${(props) => (props.$isDropdownMobileOpen ? "1" : "0")});
+  opacity: ${(props) => (props.$isDropdownMobileOpen ? "1" : "0")};
+  max-height: ${(props) => (props.$isDropdownMobileOpen ? "max-content" : "0")};
+  transition: all 0.3s ease;
 `;
-
-const LogoContainer = styled(NavLink)`
-  height: 100%;
-
-  @media (max-width: 768px) {
-    transform: scale(0.9);
-  }
-
-  @media (max-width: 1025px) {
-  }
-`;
-
 const StyledChevron = styled(ChevronDown)`
   transform: rotate(
     ${(props) => (props.$isDropdownMobileOpen ? "180deg" : "0deg")}
