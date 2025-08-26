@@ -1,8 +1,189 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, User } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownMobileOpen, setIsDropdownMobileOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
+
+  const services = [
+    { name: "Electrical Appliances", path: "/services/electrical-appliances" },
+    { name: "Deep Cleaning Service", path: "/services/deep-cleaning" },
+    { name: "Pest Control Service", path: "/services/pest-control" },
+    { name: "Plumbing Works", path: "/services/plumbing" },
+    { name: "Carpentry Works", path: "/services/carpentry" },
+    { name: "Electrical Works", path: "/services/electrical" },
+  ];
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  return (
+    <>
+      <StyledNavbar>
+        <LogoContainer to="/">
+          <Logo src="/logo.png" alt="Logo" />
+        </LogoContainer>
+
+        <div className="nav-links">
+          <NavLink to="/" exact>
+            Home
+          </NavLink>
+          <OurServices to="/about">
+            Our Services
+            <ServicesDropDown>
+              {services.map((service) => (
+                <ServiceLink key={service.path} to={service.path}>
+                  {service.name}
+                </ServiceLink>
+              ))}
+            </ServicesDropDown>
+          </OurServices>
+          {/* <NavLink to="/brands">Choose Brands</NavLink> */}
+          <NavLink to="/blogs">Blogs</NavLink>
+          <NavLink to="/faq">FAQs</NavLink>
+          <NavLink to="/about">About Us</NavLink>
+          <NavLink to="/contact">Contact Us</NavLink>
+        </div>
+
+        <RightSection>
+          {isAuthenticated ? (
+            <AuthIconLink to="/dashboard">
+              <User size={24} />
+            </AuthIconLink>
+          ) : (
+            <LoginButton to="/login">Login</LoginButton>
+          )}
+          <div className="search-icon flex-center">
+            <FaSearch />
+          </div>
+        </RightSection>
+
+        <MobileMenuButton onClick={() => setIsOpen(true)}>
+          <Menu size={24} />
+        </MobileMenuButton>
+      </StyledNavbar>
+
+      <Overlay isOpen={isOpen} onClick={() => setIsOpen(false)} />
+
+      <MobileMenu isOpen={isOpen}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <LogoContainer to="/" onClick={() => setIsOpen(false)}>
+            <Logo src="/logo.png" alt="Logo" />
+          </LogoContainer>
+          <MobileMenuButton onClick={() => setIsOpen(false)}>
+            <X size={24} />
+          </MobileMenuButton>
+        </div>
+
+        <MobileSearchContainer>
+          <FaSearch />
+          <input type="text" placeholder="Search..." />
+        </MobileSearchContainer>
+
+        <MobileNavLinks>
+          <NavLink to="/" exact onClick={() => setIsOpen(false)}>
+            Home
+          </NavLink>
+          <OurServicesMobile
+            onClick={() => setIsDropdownMobileOpen(!isDropdownMobileOpen)}
+          >
+            <span>Our Services</span>{" "}
+            <StyledChevron
+              size={20}
+              $isDropdownMobileOpen={isDropdownMobileOpen}
+            />
+            <DropdownMobile $isDropdownMobileOpen={isDropdownMobileOpen}>
+              <NavList>
+                <StyledNavLink
+                  to="/services/electrical-appliances"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Electrical Appliances
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/deep-cleaning"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Deep Cleaning
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/pest-control"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Pest Control
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/plumbing"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Plumbing
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/carpentry"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Carpentry
+                </StyledNavLink>
+                <StyledNavLink
+                  to="/services/electrical"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Electrical
+                </StyledNavLink>
+              </NavList>
+            </DropdownMobile>
+          </OurServicesMobile>
+          <NavLink to="/brands" onClick={() => setIsOpen(false)}>
+            Choose brands
+          </NavLink>
+          <NavLink to="/blogs" onClick={() => setIsOpen(false)}>
+            Blogs
+          </NavLink>
+          <NavLink to="/faq" onClick={() => setIsOpen(false)}>
+            FAQs
+          </NavLink>
+          <NavLink to="/about" onClick={() => setIsOpen(false)}>
+            About Us
+          </NavLink>
+          <NavLink to="/contact" onClick={() => setIsOpen(false)}>
+            Contact Us
+          </NavLink>
+          {isAuthenticated ? (
+            <NavLink to="/dashboard" onClick={() => setIsOpen(false)}>
+              My Dashboard
+            </NavLink>
+          ) : (
+            <NavLink to="/login" onClick={() => setIsOpen(false)}>
+              Login
+            </NavLink>
+          )}
+        </MobileNavLinks>
+      </MobileMenu>
+    </>
+  );
+}
+
+export default Navbar;
 
 const StyledNavbar = styled.nav`
   display: flex;
@@ -27,8 +208,8 @@ const StyledNavbar = styled.nav`
   .nav-links {
     display: flex;
     justify-content: center;
-    gap: 2.5rem;
-    margin: 0 15rem;
+    gap: 2rem;
+    margin: 0 12rem;
     flex-basis: 60%;
     /* border: 1px solid red; */
 
@@ -370,163 +551,36 @@ const StyledNavLink = styled(NavLink)`
     border-bottom: none;
   }
 `;
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownMobileOpen, setIsDropdownMobileOpen] = useState(false);
 
-  const services = [
-    { name: "Electrical Appliances", path: "/services/electrical-appliances" },
-    { name: "Deep Cleaning Service", path: "/services/deep-cleaning" },
-    { name: "Pest Control Service", path: "/services/pest-control" },
-    { name: "Plumbing Works", path: "/services/plumbing" },
-    { name: "Carpentry Works", path: "/services/carpentry" },
-    { name: "Electrical Works", path: "/services/electrical" },
-  ];
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* border: 2px solid red; */
+`;
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+const AuthIconLink = styled(Link)`
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  &:hover {
+    color: var(--color-primary);
+  }
+`;
 
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+const LoginButton = styled(Link)`
+  padding: 0.5rem 1.25rem;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
 
-  return (
-    <>
-      <StyledNavbar>
-        <LogoContainer to="/">
-          <Logo src="/logo.png" alt="Logo" />
-        </LogoContainer>
-
-        <div className="nav-links">
-          <NavLink to="/" exact>
-            Home
-          </NavLink>
-          <OurServices to="/about">
-            Our Services
-            <ServicesDropDown>
-              {services.map((service) => (
-                <ServiceLink key={service.path} to={service.path}>
-                  {service.name}
-                </ServiceLink>
-              ))}
-            </ServicesDropDown>
-          </OurServices>
-          {/* <NavLink to="/brands">Choose Brands</NavLink> */}
-          <NavLink to="/blogs">Blogs</NavLink>
-          <NavLink to="/faq">FAQs</NavLink>
-          <NavLink to="/about">About Us</NavLink>
-          <NavLink to="/contact">Contact Us</NavLink>
-        </div>
-
-        <div className="search-icon flex-center">
-          <FaSearch />
-        </div>
-
-        <MobileMenuButton onClick={() => setIsOpen(true)}>
-          <Menu size={24} />
-        </MobileMenuButton>
-      </StyledNavbar>
-
-      <Overlay isOpen={isOpen} onClick={() => setIsOpen(false)} />
-
-      <MobileMenu isOpen={isOpen}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <LogoContainer to="/" onClick={() => setIsOpen(false)}>
-            <Logo src="/logo.png" alt="Logo" />
-          </LogoContainer>
-          <MobileMenuButton onClick={() => setIsOpen(false)}>
-            <X size={24} />
-          </MobileMenuButton>
-        </div>
-
-        <MobileSearchContainer>
-          <FaSearch />
-          <input type="text" placeholder="Search..." />
-        </MobileSearchContainer>
-
-        <MobileNavLinks>
-          <NavLink to="/" exact onClick={() => setIsOpen(false)}>
-            Home
-          </NavLink>
-          <OurServicesMobile
-            onClick={() => setIsDropdownMobileOpen(!isDropdownMobileOpen)}
-          >
-            <span>Our Services</span>{" "}
-            <StyledChevron
-              size={20}
-              $isDropdownMobileOpen={isDropdownMobileOpen}
-            />
-            <DropdownMobile $isDropdownMobileOpen={isDropdownMobileOpen}>
-              <NavList>
-                <StyledNavLink
-                  to="/services/electrical-appliances"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Electrical Appliances
-                </StyledNavLink>
-                <StyledNavLink
-                  to="/services/deep-cleaning"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Deep Cleaning
-                </StyledNavLink>
-                <StyledNavLink
-                  to="/services/pest-control"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Pest Control
-                </StyledNavLink>
-                <StyledNavLink
-                  to="/services/plumbing"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Plumbing
-                </StyledNavLink>
-                <StyledNavLink
-                  to="/services/carpentry"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Carpentry
-                </StyledNavLink>
-                <StyledNavLink
-                  to="/services/electrical"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Electrical
-                </StyledNavLink>
-              </NavList>
-            </DropdownMobile>
-          </OurServicesMobile>
-          <NavLink to="/brands" onClick={() => setIsOpen(false)}>
-            Choose brands
-          </NavLink>
-          <NavLink to="/blogs" onClick={() => setIsOpen(false)}>
-            Blogs
-          </NavLink>
-          <NavLink to="/faq" onClick={() => setIsOpen(false)}>
-            FAQs
-          </NavLink>
-          <NavLink to="/about" onClick={() => setIsOpen(false)}>
-            About Us
-          </NavLink>
-          <NavLink to="/contact" onClick={() => setIsOpen(false)}>
-            Contact Us
-          </NavLink>
-        </MobileNavLinks>
-      </MobileMenu>
-    </>
-  );
-}
-
-export default Navbar;
+  &:hover {
+    background-color: var(--color-primary-dark);
+    color: white;
+  }
+`;

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
 import {
@@ -27,6 +27,416 @@ import {
 } from "../../components/ui/toast";
 import { useToast } from "../../components/ui/toast";
 import { NavLink } from "react-router-dom";
+import { getAllPublicBlogs } from "../../api/apiService";
+
+const BlogSection = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("latest");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [visibleItems, setVisibleItems] = useState(new Set());
+  const itemRefs = useRef([]);
+  const { toast } = useToast();
+  const ITEMS_PER_PAGE = 6;
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+
+  // 3. Fetch live data from the backend
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const data = await getAllPublicBlogs();
+        // Filter for only 'Published' blogs for the public view
+        setBlogs(data.filter((blog) => blog.status === "Published"));
+      } catch (error) {
+        toast.error("Could not fetch blogs.");
+        console.error("Error loading blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
+  // 4. Use useMemo for efficient client-side filtering and sorting
+  const filteredAndSortedBlogs = useMemo(() => {
+    let result = [...blogs];
+
+    if (search) {
+      result = result.filter(
+        (blog) =>
+          blog.title.toLowerCase().includes(search.toLowerCase()) ||
+          blog.description.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (activeCategory !== "all") {
+      result = result.filter((blog) => blog.category === activeCategory);
+    }
+
+    result.sort((a, b) => {
+      switch (sortBy) {
+        case "latest":
+          return new Date(b.createdAt) - new Date(a.createdAt); // <-- Use createdAt
+        case "popular":
+          return b.likes - a.likes; // Assuming 'likes' field exists
+        case "comments":
+          return b.comments.length - a.comments.length; // Use comments array length
+        default:
+          return 0;
+      }
+    });
+
+    return result;
+  }, [search, activeCategory, sortBy, blogs]);
+
+  useEffect(() => {
+    const observers = itemRefs.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleItems((prev) => new Set([...prev, index]));
+            observer.unobserve(entry.target);
+          }
+        },
+        { threshold: 0.2 }
+      );
+
+      if (ref) observer.observe(ref);
+      return observer;
+    });
+
+    return () => observers.forEach((observer) => observer.disconnect());
+  }, [filteredBlogs]);
+
+  // Filter and sort blogs
+  useEffect(() => {
+    let result = [...blogs];
+
+    // Apply search filter
+    if (search) {
+      result = result.filter(
+        (blog) =>
+          blog.title.toLowerCase().includes(search.toLowerCase()) ||
+          blog.description.toLowerCase().includes(search.toLowerCase()) ||
+          blog.tags.some((tag) =>
+            tag.toLowerCase().includes(search.toLowerCase())
+          )
+      );
+    }
+
+    // Apply category filter
+    if (activeCategory !== "all") {
+      result = result.filter((blog) => blog.category === activeCategory);
+    }
+
+    // Apply sorting
+    result.sort((a, b) => {
+      switch (sortBy) {
+        case "latest":
+          return new Date(b.created_at) - new Date(a.created_at);
+        case "popular":
+          return b.likes - a.likes;
+        case "comments":
+          return b.comments.length - a.comments.length;
+        default:
+          return 0;
+      }
+    });
+
+    setFilteredBlogs(result);
+    setCurrentPage(1);
+  }, [search, activeCategory, sortBy, blogs]);
+
+  const handleLike = (blogId) => {
+    setBlogs((prev) =>
+      prev.map((blog) => {
+        if (blog.id === blogId) {
+          const newLikes = blog.likes + (blog.isLiked ? -1 : 1);
+          toast({
+            title: blog.isLiked ? "Unlike" : "Like",
+            description: blog.isLiked
+              ? "Removed from your liked posts"
+              : "Added to your liked posts",
+            duration: 2000,
+          });
+          return { ...blog, likes: newLikes, isLiked: !blog.isLiked };
+        }
+        return blog;
+      })
+    );
+  };
+
+  const handleComment = (blogId, comment) => {
+    const newComment = {
+      username: "user", // In real app, get from auth
+      comment,
+      date: new Date().toISOString(),
+    };
+
+    setBlogs((prev) =>
+      prev.map((blog) => {
+        if (blog.id === blogId) {
+          toast({
+            title: "Comment Added",
+            description: "Your comment has been posted successfully",
+            duration: 2000,
+          });
+          return {
+            ...blog,
+            comments: [...blog.comments, newComment],
+            comments_count: blog.comments_count + 1,
+          };
+        }
+        return blog;
+      })
+    );
+  };
+
+  // Get current page blogs
+  const indexOfLastBlog = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstBlog = indexOfLastBlog - ITEMS_PER_PAGE;
+  const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
+  const totalPages = Math.ceil(filteredBlogs.length / ITEMS_PER_PAGE);
+
+  // Get unique categories
+  const categories = ["all", ...new Set(blogs.map((blog) => blog.category))];
+
+  if (loading) {
+    return (
+      <Section>
+        <Container style={{ textAlign: "center" }}>
+          <h2>Loading Blogs...</h2>
+        </Container>
+      </Section>
+    );
+  }
+
+  return (
+    <Section>
+      <Container>
+        <ControlsContainer>
+          <SearchWrapper>
+            <SearchInput
+              placeholder="Search blogs..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <SearchButton
+              onClick={() => {
+                /* Perform search */
+              }}
+            >
+              <Search size={18} />
+            </SearchButton>
+          </SearchWrapper>
+
+          <FiltersGroup>
+            <DropdownWrapper>
+              <DropdownButton onClick={() => setIsSortOpen(!isSortOpen)}>
+                <SortDesc size={18} />
+                Sort: {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
+              </DropdownButton>
+              {isSortOpen && (
+                <DropdownMenu>
+                  {["latest", "popular", "comments"].map((option) => (
+                    <DropdownItem
+                      key={option}
+                      onClick={() => {
+                        setSortBy(option);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option.charAt(0).toUpperCase() + option.slice(1)}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              )}
+            </DropdownWrapper>
+
+            <DropdownWrapper>
+              <DropdownButton onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
+                <Filter size={18} />
+                Category:{" "}
+                {activeCategory.charAt(0).toUpperCase() +
+                  activeCategory.slice(1)}
+              </DropdownButton>
+              {isFiltersOpen && (
+                <DropdownMenu>
+                  {categories.map((category) => (
+                    <DropdownItem
+                      key={category}
+                      onClick={() => {
+                        setActiveCategory(category);
+                        setIsFiltersOpen(false);
+                      }}
+                    >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              )}
+            </DropdownWrapper>
+          </FiltersGroup>
+        </ControlsContainer>
+
+        {currentBlogs.length > 0 ? (
+          <BlogGrid>
+            {currentBlogs.map((blog, index) => (
+              <BlogCard
+                key={blog._id}
+                to={`/blogs/${blog._id}`}
+                ref={(el) => (itemRefs.current[index] = el)}
+                isVisible={visibleItems.has(index)}
+                delay={index * 100}
+              >
+                <BlogThumbnail>
+                  <img
+                    src={`${import.meta.env.VITE_BACKEND_URL}/${
+                      blog.thumbnail
+                    }`}
+                    alt={blog.title}
+                  />
+                  <BlogCategory>{blog.category}</BlogCategory>
+                </BlogThumbnail>
+
+                <BlogContent>
+                  <BlogTitle>{blog.title}</BlogTitle>
+                  <BlogMeta>
+                    <span>
+                      <BookOpen size={16} />
+                      {blog.read_time_minutes} min read
+                    </span>
+                    <span>
+                      <Tag size={16} />
+                      {blog.tags.slice(0, 2).join(", ")}
+                    </span>
+                  </BlogMeta>
+                  <BlogDescription>{blog.description}</BlogDescription>
+
+                  <BlogActions>
+                    <ActionButton
+                      className={blog.isLiked ? "liked" : ""}
+                      onClick={() => handleLike(blog.id)}
+                    >
+                      <Heart size={18} />
+                      {blog.likes}
+                    </ActionButton>
+                    <ActionButton>
+                      <MessageSquare size={18} />
+                      {blog.comments_count}
+                    </ActionButton>
+                    <ActionButton>
+                      <Share2 size={18} />
+                      {blog.shares}
+                    </ActionButton>
+                  </BlogActions>
+
+                  {/* <CommentsContainer>
+                    <CommentForm
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const comment = e.target.comment.value;
+                        if (comment.trim()) {
+                          handleComment(blog.id, comment);
+                          e.target.reset();
+                        }
+                      }}
+                    >
+                      <CommentInput
+                        name="comment"
+                        placeholder="Add a comment..."
+                        required
+                      />
+                      <ActionButton type="submit">
+                        <Send size={18} />
+                      </ActionButton>
+                    </CommentForm>
+
+                    <CommentList>
+                      {blog.comments.slice(-3).map((comment, i) => (
+                        <Comment key={i}>
+                          <div className="header">
+                            <span className="username">{comment.username}</span>
+                            <span className="date">
+                              {format(new Date(comment.date), "MMM d, yyyy")}
+                            </span>
+                          </div>
+                          <div className="text">{comment.comment}</div>
+                        </Comment>
+                      ))}
+                    </CommentList>
+                  </CommentsContainer> */}
+                </BlogContent>
+              </BlogCard>
+            ))}
+          </BlogGrid>
+        ) : (
+          <NoResults>
+            <AlertCircle size={48} />
+            <h3>No blogs found</h3>
+            <p>Try adjusting your search or filters</p>
+          </NoResults>
+        )}
+
+        {filteredBlogs.length > ITEMS_PER_PAGE && (
+          <Pagination>
+            <PageButton
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+            >
+              <ChevronLeft size={20} />
+            </PageButton>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((page) => {
+                if (totalPages <= 5) return true;
+                if (page === 1 || page === totalPages) return true;
+                if (page >= currentPage - 1 && page <= currentPage + 1)
+                  return true;
+                return false;
+              })
+              .map((page, index, array) => {
+                if (index > 0 && array[index - 1] !== page - 1) {
+                  return [
+                    <span key={`ellipsis-${page}`}>...</span>,
+                    <PageButton
+                      key={page}
+                      active={currentPage === page}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </PageButton>,
+                  ];
+                }
+                return (
+                  <PageButton
+                    key={page}
+                    active={currentPage === page}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </PageButton>
+                );
+              })}
+
+            <PageButton
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              <ChevronRight size={20} />
+            </PageButton>
+          </Pagination>
+        )}
+      </Container>
+    </Section>
+  );
+};
+
+export default BlogSection;
 
 // Styled Components
 const Section = styled.section`
@@ -442,401 +852,3 @@ const NoResults = styled.div`
   align-items: center;
   gap: 1rem;
 `;
-
-const BlogSection = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [filteredBlogs, setFilteredBlogs] = useState([]);
-  const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [sortBy, setSortBy] = useState("latest");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [visibleItems, setVisibleItems] = useState(new Set());
-  const itemRefs = useRef([]);
-  const { toast } = useToast();
-  const ITEMS_PER_PAGE = 6;
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const [isSortOpen, setIsSortOpen] = useState(false);
-
-  // Simulated blog data fetch
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await import("../../../src/data/blogs.json");
-        setBlogs(response.default);
-        setFilteredBlogs(response.default);
-      } catch (error) {
-        console.error("Error loading blogs:", error);
-      }
-    };
-    fetchBlogs();
-  }, []);
-
-  useEffect(() => {
-    const observers = itemRefs.current.map((ref, index) => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisibleItems((prev) => new Set([...prev, index]));
-            observer.unobserve(entry.target);
-          }
-        },
-        { threshold: 0.2 }
-      );
-
-      if (ref) observer.observe(ref);
-      return observer;
-    });
-
-    return () => observers.forEach((observer) => observer.disconnect());
-  }, [filteredBlogs]);
-
-  // Filter and sort blogs
-  useEffect(() => {
-    let result = [...blogs];
-
-    // Apply search filter
-    if (search) {
-      result = result.filter(
-        (blog) =>
-          blog.title.toLowerCase().includes(search.toLowerCase()) ||
-          blog.description.toLowerCase().includes(search.toLowerCase()) ||
-          blog.tags.some((tag) =>
-            tag.toLowerCase().includes(search.toLowerCase())
-          )
-      );
-    }
-
-    // Apply category filter
-    if (activeCategory !== "all") {
-      result = result.filter((blog) => blog.category === activeCategory);
-    }
-
-    // Apply sorting
-    result.sort((a, b) => {
-      switch (sortBy) {
-        case "latest":
-          return new Date(b.created_at) - new Date(a.created_at);
-        case "popular":
-          return b.likes - a.likes;
-        case "comments":
-          return b.comments.length - a.comments.length;
-        default:
-          return 0;
-      }
-    });
-
-    setFilteredBlogs(result);
-    setCurrentPage(1);
-  }, [search, activeCategory, sortBy, blogs]);
-
-  const handleLike = (blogId) => {
-    setBlogs((prev) =>
-      prev.map((blog) => {
-        if (blog.id === blogId) {
-          const newLikes = blog.likes + (blog.isLiked ? -1 : 1);
-          toast({
-            title: blog.isLiked ? "Unlike" : "Like",
-            description: blog.isLiked
-              ? "Removed from your liked posts"
-              : "Added to your liked posts",
-            duration: 2000,
-          });
-          return { ...blog, likes: newLikes, isLiked: !blog.isLiked };
-        }
-        return blog;
-      })
-    );
-  };
-
-  const handleComment = (blogId, comment) => {
-    const newComment = {
-      username: "user", // In real app, get from auth
-      comment,
-      date: new Date().toISOString(),
-    };
-
-    setBlogs((prev) =>
-      prev.map((blog) => {
-        if (blog.id === blogId) {
-          toast({
-            title: "Comment Added",
-            description: "Your comment has been posted successfully",
-            duration: 2000,
-          });
-          return {
-            ...blog,
-            comments: [...blog.comments, newComment],
-            comments_count: blog.comments_count + 1,
-          };
-        }
-        return blog;
-      })
-    );
-  };
-
-  // Get current page blogs
-  const indexOfLastBlog = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstBlog = indexOfLastBlog - ITEMS_PER_PAGE;
-  const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
-  const totalPages = Math.ceil(filteredBlogs.length / ITEMS_PER_PAGE);
-
-  // Get unique categories
-  const categories = ["all", ...new Set(blogs.map((blog) => blog.category))];
-
-  return (
-    <Section>
-      <Container>
-        {/* <ControlsContainer>
-          <SearchContainer>
-            <Search className="icon" size={20} />
-            <SearchInput
-              placeholder="Search blogs..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </SearchContainer>
-
-          <FiltersGroup>
-            <SortButton
-              onClick={() =>
-                setSortBy((prev) => {
-                  const options = ["latest", "popular", "comments"];
-                  const currentIndex = options.indexOf(prev);
-                  return options[(currentIndex + 1) % options.length];
-                })
-              }
-            >
-              <SortDesc size={18} />
-              {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
-            </SortButton>
-
-            {categories.map((category) => (
-              <FilterButton
-                key={category}
-                active={activeCategory === category}
-                onClick={() => setActiveCategory(category)}
-              >
-                <Filter size={18} />
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </FilterButton>
-            ))}
-          </FiltersGroup>
-        </ControlsContainer> */}
-
-        <ControlsContainer>
-          <SearchWrapper>
-            <SearchInput
-              placeholder="Search blogs..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <SearchButton
-              onClick={() => {
-                /* Perform search */
-              }}
-            >
-              <Search size={18} />
-            </SearchButton>
-          </SearchWrapper>
-
-          <FiltersGroup>
-            <DropdownWrapper>
-              <DropdownButton onClick={() => setIsSortOpen(!isSortOpen)}>
-                <SortDesc size={18} />
-                Sort: {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
-              </DropdownButton>
-              {isSortOpen && (
-                <DropdownMenu>
-                  {["latest", "popular", "comments"].map((option) => (
-                    <DropdownItem
-                      key={option}
-                      onClick={() => {
-                        setSortBy(option);
-                        setIsSortOpen(false);
-                      }}
-                    >
-                      {option.charAt(0).toUpperCase() + option.slice(1)}
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              )}
-            </DropdownWrapper>
-
-            <DropdownWrapper>
-              <DropdownButton onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
-                <Filter size={18} />
-                Category:{" "}
-                {activeCategory.charAt(0).toUpperCase() +
-                  activeCategory.slice(1)}
-              </DropdownButton>
-              {isFiltersOpen && (
-                <DropdownMenu>
-                  {categories.map((category) => (
-                    <DropdownItem
-                      key={category}
-                      onClick={() => {
-                        setActiveCategory(category);
-                        setIsFiltersOpen(false);
-                      }}
-                    >
-                      {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              )}
-            </DropdownWrapper>
-          </FiltersGroup>
-        </ControlsContainer>
-
-        {currentBlogs.length > 0 ? (
-          <BlogGrid>
-            {currentBlogs.map((blog, index) => (
-              <BlogCard
-                key={blog.id}
-                to={`/blogs/${blog.id}`}
-                ref={(el) => (itemRefs.current[index] = el)}
-                isVisible={visibleItems.has(index)}
-                delay={index * 100}
-              >
-                <BlogThumbnail>
-                  <img
-                    src={`/api/placeholder/blog-card.jpg`}
-                    alt={blog.title}
-                  />
-                  <BlogCategory>{blog.category}</BlogCategory>
-                </BlogThumbnail>
-
-                <BlogContent>
-                  <BlogTitle>{blog.title}</BlogTitle>
-                  <BlogMeta>
-                    <span>
-                      <BookOpen size={16} />
-                      {blog.read_time_minutes} min read
-                    </span>
-                    <span>
-                      <Tag size={16} />
-                      {blog.tags.slice(0, 2).join(", ")}
-                    </span>
-                  </BlogMeta>
-                  <BlogDescription>{blog.description}</BlogDescription>
-
-                  <BlogActions>
-                    <ActionButton
-                      className={blog.isLiked ? "liked" : ""}
-                      onClick={() => handleLike(blog.id)}
-                    >
-                      <Heart size={18} />
-                      {blog.likes}
-                    </ActionButton>
-                    <ActionButton>
-                      <MessageSquare size={18} />
-                      {blog.comments_count}
-                    </ActionButton>
-                    <ActionButton>
-                      <Share2 size={18} />
-                      {blog.shares}
-                    </ActionButton>
-                  </BlogActions>
-
-                  <CommentsContainer>
-                    <CommentForm
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        const comment = e.target.comment.value;
-                        if (comment.trim()) {
-                          handleComment(blog.id, comment);
-                          e.target.reset();
-                        }
-                      }}
-                    >
-                      <CommentInput
-                        name="comment"
-                        placeholder="Add a comment..."
-                        required
-                      />
-                      <ActionButton type="submit">
-                        <Send size={18} />
-                      </ActionButton>
-                    </CommentForm>
-
-                    <CommentList>
-                      {blog.comments.slice(-3).map((comment, i) => (
-                        <Comment key={i}>
-                          <div className="header">
-                            <span className="username">{comment.username}</span>
-                            <span className="date">
-                              {format(new Date(comment.date), "MMM d, yyyy")}
-                            </span>
-                          </div>
-                          <div className="text">{comment.comment}</div>
-                        </Comment>
-                      ))}
-                    </CommentList>
-                  </CommentsContainer>
-                </BlogContent>
-              </BlogCard>
-            ))}
-          </BlogGrid>
-        ) : (
-          <NoResults>
-            <AlertCircle size={48} />
-            <h3>No blogs found</h3>
-            <p>Try adjusting your search or filters</p>
-          </NoResults>
-        )}
-
-        {filteredBlogs.length > ITEMS_PER_PAGE && (
-          <Pagination>
-            <PageButton
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((prev) => prev - 1)}
-            >
-              <ChevronLeft size={20} />
-            </PageButton>
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1)
-              .filter((page) => {
-                if (totalPages <= 5) return true;
-                if (page === 1 || page === totalPages) return true;
-                if (page >= currentPage - 1 && page <= currentPage + 1)
-                  return true;
-                return false;
-              })
-              .map((page, index, array) => {
-                if (index > 0 && array[index - 1] !== page - 1) {
-                  return [
-                    <span key={`ellipsis-${page}`}>...</span>,
-                    <PageButton
-                      key={page}
-                      active={currentPage === page}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </PageButton>,
-                  ];
-                }
-                return (
-                  <PageButton
-                    key={page}
-                    active={currentPage === page}
-                    onClick={() => setCurrentPage(page)}
-                  >
-                    {page}
-                  </PageButton>
-                );
-              })}
-
-            <PageButton
-              disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-            >
-              <ChevronRight size={20} />
-            </PageButton>
-          </Pagination>
-        )}
-      </Container>
-    </Section>
-  );
-};
-
-export default BlogSection;

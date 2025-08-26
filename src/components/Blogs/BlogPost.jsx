@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   Heart,
@@ -21,6 +21,253 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import PageTransition from "../../utils/PageTransition";
+
+import { useAuth } from "../../context/AuthContext";
+import { getBlogById, addCommentToBlog } from "../../api/apiService";
+import toast from "react-hot-toast";
+
+export default function BlogPost() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(blog?.likes_count || 0);
+  const [newComment, setNewComment] = useState("");
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const data = await getBlogById(id);
+        setBlog(data);
+      } catch (error) {
+        toast.error("Blog post not found.");
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlog();
+  }, [id, navigate]);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
+  };
+
+  const handleShare = (platform) => {
+    const url = window.location.href;
+    const title = blog.title;
+
+    const shareUrls = {
+      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+        title
+      )}&url=${encodeURIComponent(url)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        url
+      )}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+        url
+      )}`,
+    };
+
+    window.open(shareUrls[platform], "_blank");
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      // Optionally add some feedback like a toast notification
+      alert("Link copied to clipboard!");
+    });
+  };
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    if (!isAuthenticated) {
+      toast.error("You must be logged in to comment.");
+      return;
+    }
+
+    const loadingToast = toast.loading("Posting comment...");
+    try {
+      const addedComment = await addCommentToBlog(id, { comment: newComment });
+
+      // Optimistically update the UI with the new comment from the server response
+      setBlog((prev) => ({
+        ...prev,
+        comments: [addedComment, ...prev.comments],
+      }));
+      setNewComment("");
+      toast.dismiss(loadingToast);
+      toast.success("Comment posted successfully!");
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      toast.error(error.error || "Failed to post comment.");
+    }
+  };
+
+  // useEffect(() => {
+  //   const fetchBlog = async () => {
+  //     try {
+  //       const response = await import("../../../src/data/blogs.json");
+  //       const foundBlog = response.default.find((b) => b.id === Number(id));
+  //       console.log("blogs array", response.default);
+  //       console.log(foundBlog);
+  //       if (foundBlog) {
+  //         setBlog(foundBlog);
+  //       } else {
+  //         navigate("/404");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error loading blog:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchBlog();
+  // }, [id, navigate]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!blog) return null;
+
+  return (
+    <PageTransition>
+      <PageContainer>
+        <HeroSection>
+          <Container>
+            <BackButton onClick={() => navigate(-1)}>
+              <ArrowLeft size={20} /> Back to Blogs
+            </BackButton>
+            <TagsContainer>
+              <CategoryTag>{blog.category}</CategoryTag>
+            </TagsContainer>
+            <Title>{blog.title}</Title>
+            <MetaInfo>
+              <MetaItem>
+                <User size={18} />
+                <span>{blog.author.email}</span>
+              </MetaItem>
+              <MetaItem>
+                <Calendar size={18} />
+                <time>{format(new Date(blog.createdAt), "MMMM d, yyyy")}</time>
+              </MetaItem>
+              <MetaItem>
+                <Clock size={18} />
+                <span>{blog.read_time_minutes} min read</span>
+              </MetaItem>
+            </MetaInfo>
+          </Container>
+        </HeroSection>
+
+        <Container>
+          <MainContent>
+            <Article>
+              <FeaturedImage>
+                <img
+                  src={`${import.meta.env.VITE_BACKEND_URL}/${blog.thumbnail}`}
+                  alt={blog.title}
+                />
+              </FeaturedImage>
+
+              <Content>
+                <p>{blog.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+              </Content>
+
+              {/* <ActionBar>
+                <ActionButton active={isLiked} onClick={handleLike}>
+                  <Heart size={20} />
+                  {likesCount} Likes
+                </ActionButton>
+                <ActionButton>
+                  <MessageSquare size={20} />
+                  {blog.comments_count} Comments
+                </ActionButton>
+              </ActionBar> */}
+            </Article>
+
+            <Sidebar>
+              <AuthorCard>
+                <AuthorAvatar />
+                <AuthorName>{blog.author.email}</AuthorName>
+                <AuthorBio>Technical Writer & Industry Expert</AuthorBio>
+              </AuthorCard>
+
+              <Card>
+                <h3>Share this article</h3>
+                <ShareButton onClick={() => handleShare("twitter")}>
+                  <Twitter size={18} />
+                  Share on Twitter
+                </ShareButton>
+                <ShareButton onClick={() => handleShare("facebook")}>
+                  <Facebook size={18} />
+                  Share on Facebook
+                </ShareButton>
+                <ShareButton onClick={() => handleShare("linkedin")}>
+                  <Linkedin size={18} />
+                  Share on LinkedIn
+                </ShareButton>
+                <ShareButton onClick={handleCopyLink}>
+                  <Copy size={18} />
+                  Copy Link
+                </ShareButton>
+              </Card>
+            </Sidebar>
+          </MainContent>
+
+          <CommentsSection>
+            <h2>Comments ({blog.comments.length})</h2>
+
+            {isAuthenticated ? (
+              <CommentForm onSubmit={handleCommentSubmit}>
+                <CommentInput
+                  placeholder="Join the discussion..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+                <SubmitButton type="submit">
+                  <Send size={18} /> Post Comment
+                </SubmitButton>
+              </CommentForm>
+            ) : (
+              <p>
+                Please <Link to="/login">log in</Link> to post a comment.
+              </p>
+            )}
+
+            {blog.comments.map((comment) => (
+              <CommentCard key={comment._id}>
+                <CommentHeader>
+                  <CommentAuthor>
+                    <CommentAvatar />
+                    <CommentMeta>
+                      <h4>{comment.author.email}</h4>
+                      <time>
+                        {format(new Date(comment.createdAt), "MMM d, yyyy")}
+                      </time>
+                    </CommentMeta>
+                  </CommentAuthor>
+                </CommentHeader>
+                <p>{comment.comment}</p>
+              </CommentCard>
+            ))}
+          </CommentsSection>
+        </Container>
+      </PageContainer>
+    </PageTransition>
+  );
+}
 
 // Styled Components
 const PageContainer = styled.div`
@@ -328,224 +575,3 @@ const LoadingSpinner = styled.div`
     }
   }
 `;
-
-export default function BlogPost() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [blog, setBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(blog?.likes_count || 0);
-  const [newComment, setNewComment] = useState("");
-
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
-  };
-
-  const handleShare = (platform) => {
-    const url = window.location.href;
-    const title = blog.title;
-
-    const shareUrls = {
-      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        title
-      )}&url=${encodeURIComponent(url)}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        url
-      )}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-        url
-      )}`,
-    };
-
-    window.open(shareUrls[platform], "_blank");
-  };
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      // Optionally add some feedback like a toast notification
-      alert("Link copied to clipboard!");
-    });
-  };
-
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    if (!newComment.trim()) return;
-
-    // Add the new comment to the blog's comments
-    const newCommentObj = {
-      username: "Current User", // Replace with actual user name
-      date: new Date().toISOString(),
-      comment: newComment,
-    };
-
-    setBlog((prev) => ({
-      ...prev,
-      comments: [newCommentObj, ...prev.comments],
-      comments_count: prev.comments_count + 1,
-    }));
-
-    setNewComment("");
-  };
-
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const response = await import("../../../src/data/blogs.json");
-        const foundBlog = response.default.find((b) => b.id === Number(id));
-        console.log("blogs array", response.default);
-        console.log(foundBlog);
-        if (foundBlog) {
-          setBlog(foundBlog);
-        } else {
-          navigate("/404");
-        }
-      } catch (error) {
-        console.error("Error loading blog:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBlog();
-  }, [id, navigate]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (!blog) return null;
-
-  return (
-    <PageTransition>
-      <PageContainer>
-        <HeroSection>
-          <Container>
-            <BackButton onClick={() => navigate(-1)}>
-              <ArrowLeft size={20} />
-              Back to Blogs
-            </BackButton>
-
-            <TagsContainer>
-              <CategoryTag>{blog.category}</CategoryTag>
-              {blog.tags.map((tag) => (
-                <StyledTag key={tag}>{tag}</StyledTag>
-              ))}
-            </TagsContainer>
-
-            <Title>{blog.title}</Title>
-
-            <MetaInfo>
-              <MetaItem>
-                <User size={18} />
-                <span>{blog.author}</span>
-              </MetaItem>
-              <MetaItem>
-                <Calendar size={18} />
-                <time>{format(new Date(blog.created_at), "MMMM d, yyyy")}</time>
-              </MetaItem>
-              <MetaItem>
-                <Clock size={18} />
-                <span>{blog.read_time_minutes} min read</span>
-              </MetaItem>
-            </MetaInfo>
-          </Container>
-        </HeroSection>
-
-        <Container>
-          <MainContent>
-            <Article>
-              <FeaturedImage>
-                <img src={`/api/placeholder/blog-card.jpg`} alt={blog.title} />
-              </FeaturedImage>
-
-              <Content>
-                <p>{blog.description}</p>
-                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
-              </Content>
-
-              <ActionBar>
-                <ActionButton active={isLiked} onClick={handleLike}>
-                  <Heart size={20} />
-                  {likesCount} Likes
-                </ActionButton>
-                <ActionButton>
-                  <MessageSquare size={20} />
-                  {blog.comments_count} Comments
-                </ActionButton>
-              </ActionBar>
-            </Article>
-
-            <Sidebar>
-              <AuthorCard>
-                <AuthorAvatar />
-                <AuthorName>{blog.author}</AuthorName>
-                <AuthorBio>Technical Writer & Industry Expert</AuthorBio>
-              </AuthorCard>
-
-              <Card>
-                <h3>Share this article</h3>
-                <ShareButton onClick={() => handleShare("twitter")}>
-                  <Twitter size={18} />
-                  Share on Twitter
-                </ShareButton>
-                <ShareButton onClick={() => handleShare("facebook")}>
-                  <Facebook size={18} />
-                  Share on Facebook
-                </ShareButton>
-                <ShareButton onClick={() => handleShare("linkedin")}>
-                  <Linkedin size={18} />
-                  Share on LinkedIn
-                </ShareButton>
-                <ShareButton onClick={handleCopyLink}>
-                  <Copy size={18} />
-                  Copy Link
-                </ShareButton>
-              </Card>
-            </Sidebar>
-          </MainContent>
-
-          <CommentsSection>
-            <h2>Comments ({blog.comments_count})</h2>
-
-            <CommentForm onSubmit={handleCommentSubmit}>
-              <CommentInput
-                placeholder="Add a comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              />
-              <SubmitButton type="submit">
-                <Send size={18} />
-                Post Comment
-              </SubmitButton>
-            </CommentForm>
-
-            {blog.comments.map((comment, index) => (
-              <CommentCard key={index}>
-                <CommentHeader>
-                  <CommentAuthor>
-                    <CommentAvatar />
-                    <CommentMeta>
-                      <h4>{comment.username}</h4>
-                      <time>
-                        {format(new Date(comment.date), "MMM d, yyyy")}
-                      </time>
-                    </CommentMeta>
-                  </CommentAuthor>
-                  <ActionButton>
-                    <ThumbsUp size={16} />
-                  </ActionButton>
-                </CommentHeader>
-                <p>{comment.comment}</p>
-              </CommentCard>
-            ))}
-          </CommentsSection>
-        </Container>
-      </PageContainer>
-    </PageTransition>
-  );
-}
