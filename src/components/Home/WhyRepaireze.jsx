@@ -231,7 +231,7 @@ const WhyRepaireze = () => {
       <Container>
         <div>
           <h2>Why Repaireze?</h2>
-          <p>Elevating Your Devices through Precision Repairs!</p>
+          <p>We only use authentic, high-quality spare parts</p>
         </div>
 
         <Grid>
