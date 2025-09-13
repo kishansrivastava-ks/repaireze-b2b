@@ -8,14 +8,14 @@ const images = [
     url: "/api/placeholder/intro1.png",
     alt: "Innovation at work",
     caption:
-      "Manage your Repairing needs with our comprehensive B2B Maintenance solutions",
+      "Simplify your repair and maintenance needs with end-to-end B2B solutions designed to keep modern businesses running without interruptions",
     // subCaption: "Innovative solutions for tomorrow's challenges",
   },
   {
     id: 2,
     url: "/api/placeholder/intro2.jpg",
     alt: "Modern solutions",
-    caption: "Creating B2B webhooks for a seamless service experience",
+    caption: "From B2B webhooks to smart tracking tools, we bring efficiency and transparency into every service process",
     // subCaption: "Advanced solutions powering digital transformation",
   },
   {
@@ -23,7 +23,7 @@ const images = [
     url: "/api/placeholder/intro3.png",
     alt: "Creative workspace",
     caption:
-      "360 degrees fully mechanized deep cleaning for a long-lasting impact",
+      "Enjoy 360° mechanized deep cleaning services that create a safer, healthier, and long-lasting workplace environment",
     // subCaption: "Delivering quality through innovation and dedication",
   },
   // {
@@ -38,7 +38,7 @@ const images = [
     url: "/api/placeholder/intro5.png",
     alt: "Future forward",
     caption:
-      "Precision Carpenter works for a better finish using high-end industrial tools",
+      "Our precision carpentry solutions, powered by high-end industrial tools, guarantee durability and professional finishes for your space",
     // subCaption: "Pioneering the future of technology and innovation",
   },
 ];
