@@ -112,22 +112,32 @@ const FAQ = () => {
     {
       question: "Do you offer any discounts or promotions on Services?",
       answer:
-        "We don't offer discount or promotions. However, we can help you find discounts or promotions for specific service if you provide more details. Let us know what you're looking for, and we will assist you in finding the best deals on services!",
+        "We don’t offer direct discounts, but we help businesses find cost-effective solutions tailored to their needs. Share your requirements and we’ll recommend the most budget-friendly service plans",
     },
     {
       question: "What types of services do you deliver?",
       answer:
-        "We deliver wide range of services incliuding Electrical Appliences( Installation, Service & Repair), Pest Control Services, Deep Cleaning Services, Carpentery Services, Plumber Services, Electrical Works.",
+        "We provide a wide range of services including Electrical Appliances (Installation, Service & Repair), Pest Control, Deep Cleaning, Carpentry, Plumbing, and Electrical Works",
     },
     {
       question: "Do you offer post service coverage?",
       answer:
-        "Yes, we provide a comprehensive post service coverage on all our services. Spare Parts are covered for 45 days, and our labor work comes with a 15-days post service coverage. If you experience any issues related to our service, we'll fix it at no additional cost.",
+        "Yes! All services include a 45-day warranty on spare parts and 15-day labor coverage. If issues reoccur within this period, we’ll fix them at no extra cost",
     },
     {
       question: "What are your payment options?",
       answer:
-        "We accept all major credit cards, debit cards, cash, and UPI’s. For business clients, we also offer directly Bank Transfer options. Payment is only required once the service is successfully done.",
+        "We accept all major credit/debit cards, UPI, cash, and bank transfers. For corporate clients, flexible billing and payment terms are available.",
+    },
+    {
+      question: "Can you handle multi-location service requests?",
+      answer:
+        "Yes, we specialize in managing multi-city B2B repair projects across India.",
+    },
+    {
+      question: "Do you provide Annual Maintenance Contracts (AMC)? ",
+      answer:
+        "Absolutely! Our AMC plans cover all your repair and maintenance needs with priority service, predictable costs, and dedicated support.",
     },
   ];
 
