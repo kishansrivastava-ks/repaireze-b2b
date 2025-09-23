@@ -50,10 +50,6 @@ const servicesOffered = [
     title: "Emergency Repairs",
     description: "Quick response for urgent carpentry repair needs",
   },
-];
-
-// Services we don't cover
-const servicesNotOffered = [
   {
     icon: <Building size={24} />,
     title: "Large Commercial",
@@ -74,8 +70,8 @@ const servicesNotOffered = [
     title: "Plumbing Services",
     description: "Plumbing installations and repairs",
   },
-];
 
+];
 const Section = styled.section`
   padding: 3rem 0;
   padding-bottom: 1rem;
