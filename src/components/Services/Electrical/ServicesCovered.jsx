@@ -279,7 +279,7 @@ const ServicesCovered = () => {
           </h2>
         </SectionHeader>
 
-        <Grid>
+        {/* <Grid>
           {servicesNotOffered.map((service, index) => (
             <ServiceCard
               key={index}
@@ -305,7 +305,7 @@ const ServicesCovered = () => {
               </CardContent>
             </ServiceCard>
           ))}
-        </Grid>
+        </Grid> */}
       </Container>
     </Section>
   );
