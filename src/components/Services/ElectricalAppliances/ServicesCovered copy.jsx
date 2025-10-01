@@ -264,7 +264,7 @@ const ServicesCovered = () => {
           ))}
         </Grid>
 
-        <SectionHeader
+        {/* <SectionHeader
           isNegative
           isVisible={visibleItems.has(servicesOffered.length + 1)}
           ref={(el) => (sectionRefs.current[servicesOffered.length + 1] = el)}
@@ -272,7 +272,7 @@ const ServicesCovered = () => {
           <h2>
             <X size={32} /> We are unable to assist you with
           </h2>
-        </SectionHeader>
+        </SectionHeader> */}
 
         {/* <Grid>
           {servicesNotOffered.map((service, index) => (
