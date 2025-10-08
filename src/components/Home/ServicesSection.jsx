@@ -8,27 +8,34 @@ const serviceCards = [
     icon: <Power size={40} />,
     title: "Electrical Appliances",
     path: "/services/electrical-appliances",
+    description: "xttqsw;d",
   },
   {
     icon: <Brush size={40} />,
     title: "Deep Cleaning",
     path: "/services/deep-cleaning",
+    description: "xttqsw;d",
   },
   {
     icon: <Bug size={40} />,
     title: "Pest Control",
     path: "/services/pest-control",
+    description: "xttqsw;d"
   },
-  { icon: <Wrench size={40} />, title: "Plumbing", path: "/services/plumbing" },
+  { icon: <Wrench size={40} />, title: "Plumbing", path: "/services/plumbing" ,description: "xttqsw;d"
+},
+  
   {
     icon: <Hammer size={40} />,
     title: "Carpentry",
     path: "/services/carpentry",
+    description: "xttqsw;d",
   },
   {
     icon: <Zap size={40} />,
     title: "Electrical",
     path: "/services/electrical",
+    description: "xttqsw;d",
   },
 ];
 
@@ -266,7 +273,7 @@ const ServicesSection = () => {
             >
               <div className="icon">{service.icon}</div>
               <h3>{service.title}</h3>
-              <p>Innovative solutions tailored to your needs</p>
+              <p>{service.description}</p>
             </Card>
           ))}
         </CardList>

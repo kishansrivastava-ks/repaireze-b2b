@@ -191,9 +191,7 @@ const BestInRepairs = () => {
               >
                 <h2>Best In Repairs</h2>
                 <p>
-                  Experience unmatched repair services for all your devices. Our
-                  expert technicians deliver precision repairs with guaranteed
-                  satisfaction and quick turnaround times.
+                  <h4>Experience unmatched repair services for all your business needs</h4> Our team of skilled professionals ensures precision repairs, guaranteed satisfaction, and fast turnaround times, helping you minimize downtime and maximize efficiency
                 </p>
               </HighlightCard>
             ) : (

@@ -50,10 +50,6 @@ const servicesOffered = [
     title: "Emergency Repairs",
     description: "Quick response for urgent carpentry repair needs",
   },
-];
-
-// Services we don't cover
-const servicesNotOffered = [
   {
     icon: <Building size={24} />,
     title: "Large Commercial",
@@ -74,8 +70,8 @@ const servicesNotOffered = [
     title: "Plumbing Services",
     description: "Plumbing installations and repairs",
   },
-];
 
+];
 const Section = styled.section`
   padding: 3rem 0;
   padding-bottom: 1rem;
@@ -265,7 +261,7 @@ const ServicesCovered = () => {
           ))}
         </Grid>
 
-        <SectionHeader
+        {/* <SectionHeader
           isNegative
           isVisible={visibleItems.has(servicesOffered.length + 1)}
           ref={(el) => (sectionRefs.current[servicesOffered.length + 1] = el)}
@@ -273,9 +269,9 @@ const ServicesCovered = () => {
           <h2>
             <X size={32} /> Services Not Provided
           </h2>
-        </SectionHeader>
+        </SectionHeader> */}
 
-        <Grid>
+        {/* <Grid>
           {servicesNotOffered.map((service, index) => (
             <ServiceCard
               key={index}
@@ -301,7 +297,7 @@ const ServicesCovered = () => {
               </CardContent>
             </ServiceCard>
           ))}
-        </Grid>
+        </Grid> */}
       </Container>
     </Section>
   );

@@ -7,36 +7,36 @@ const features = [
     icon: <Heart size={32} />,
     title: "100% Customer Satisfaction",
     description:
-      "Committed to delivering exceptional service that exceeds expectations.",
+      "Service that exceeds expectations, every time",
   },
   {
     icon: <Wallet size={32} />,
     title: "Budget-Friendly",
-    description: "Quality repairs at competitive prices to suit every budget.",
+    description: "Affordable pricing without compromising on quality",
   },
   {
     icon: <Shield size={32} />,
     title: "Priority on Safety",
     description:
-      "Rigorous safety protocols ensure your device's security and integrity.",
+      "Strict safety protocols for all works and environments",
   },
   {
     icon: <UserCheck size={32} />,
     title: "Professional Technicians",
     description:
-      "Expert certified technicians with years of specialized experience.",
+      "Certified, experienced experts for specialized services",
   },
   {
     icon: <Award size={32} />,
     title: "Warranty on Parts",
     description:
-      "Comprehensive warranty coverage for peace of mind on all repairs.",
+      "Coverage on repairs and parts for peace of mind",
   },
   {
     icon: <Box size={32} />,
     title: "Premium Parts",
     description:
-      "Only the highest quality authentic parts used in every repair.",
+      "We only use authentic, high-quality spare parts",
   },
 ];
 
@@ -231,7 +231,7 @@ const WhyRepaireze = () => {
       <Container>
         <div>
           <h2>Why Repaireze?</h2>
-          <p>Elevating Your Devices through Precision Repairs!</p>
+          <p>We help businesses save time, cut costs, and improve operational efficiency</p>
         </div>
 
         <Grid>
