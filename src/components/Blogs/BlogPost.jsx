@@ -23,11 +23,16 @@ import { format } from "date-fns";
 import PageTransition from "../../utils/PageTransition";
 
 import { useAuth } from "../../context/AuthContext";
-import { getBlogById, addCommentToBlog } from "../../api/apiService";
+import {
+  getBlogById,
+  addCommentToBlog,
+  getBlogBySlug,
+} from "../../api/apiService";
 import toast from "react-hot-toast";
 
 export default function BlogPost() {
-  const { id } = useParams();
+  // const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
@@ -40,7 +45,8 @@ export default function BlogPost() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const data = await getBlogById(id);
+        // const data = await getBlogById(id);
+        const data = await getBlogBySlug(slug);
         setBlog(data);
       } catch (error) {
         toast.error("Blog post not found.");
@@ -50,7 +56,7 @@ export default function BlogPost() {
       }
     };
     fetchBlog();
-  }, [id, navigate]);
+  }, [slug, navigate]);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -94,7 +100,9 @@ export default function BlogPost() {
 
     const loadingToast = toast.loading("Posting comment...");
     try {
-      const addedComment = await addCommentToBlog(id, { comment: newComment });
+      const addedComment = await addCommentToBlog(blog._id, {
+        comment: newComment,
+      });
 
       // Optimistically update the UI with the new comment from the server response
       setBlog((prev) => ({

@@ -61,6 +61,15 @@ export const getBlogById = async (id) => {
   }
 };
 
+export const getBlogBySlug = async (slug) => {
+  try {
+    const response = await apiClient.get(`/blogs/slug/${slug}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const deleteBlog = async (id) => {
   try {
     const response = await apiClient.delete(`/blogs/${id}`);

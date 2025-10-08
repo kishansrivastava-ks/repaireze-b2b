@@ -288,7 +288,7 @@ const BlogSection = () => {
             {currentBlogs.map((blog, index) => (
               <BlogCard
                 key={blog._id}
-                to={`/blogs/${blog._id}`}
+                to={`/blogs/${blog.slug}`}
                 ref={(el) => (itemRefs.current[index] = el)}
                 isVisible={visibleItems.has(index)}
                 delay={index * 100}

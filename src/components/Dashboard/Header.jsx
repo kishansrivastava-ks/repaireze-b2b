@@ -207,6 +207,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
         <UserButton>
           <UserAvatar>{getUserInitials(user?.email)}</UserAvatar>
+          {console.log(user)}
           <WelcomeText>
             {user ? `Welcome, ${user.email.split("@")[0]}` : "Welcome"}
           </WelcomeText>
