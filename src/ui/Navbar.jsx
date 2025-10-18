@@ -42,7 +42,7 @@ function Navbar() {
           <NavLink to="/" exact>
             Home
           </NavLink>
-          <OurServices to="/about">
+          <OurServices to="">
             Our Services
             <ServicesDropDown>
               {services.map((service) => (
@@ -411,7 +411,7 @@ const ServicesDropDown = styled.div`
   width: 16rem;
   background-color: white;
   position: absolute;
-  top: 110%;
+  top: 100%;
   left: 50%;
   transform: translateY(-1rem);
   opacity: 0;
